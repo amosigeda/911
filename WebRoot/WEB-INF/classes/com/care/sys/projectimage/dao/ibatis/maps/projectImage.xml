@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="projectImage">
+	<select id="getProjectImage" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		select pi.*,p.project_name from projectimage pi left join projectinfo p on pi.projectId = p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getProjectImageListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		select pi.*,p.project_name from projectimage pi left join projectinfo p on pi.projectId = p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend="" property="from">
+				$from$
+			</isNotEmpty>
+			,
+			<isNotEmpty prepend="" property="pageSize">
+				$pageSize$
+			</isNotEmpty>	
+	</select>
+	
+	<select id="getProjectImageListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		select count(1) from projectimage pi left join projectinfo p on pi.projectId=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertProjectImage" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		insert into projectimage(projectId,downloadpath1,downloadpath2,downloadpath3,downloadpath4,downloadpath5,downloadstatus)
+						values(#projectId#,#downLoadPath1#,#downLoadPath2#,#downLoadPath3#,#downLoadPath4#,#downLoadPath5#,#downLoadStatus#)
+	</insert>
+	
+	<update id="updateProjectImage" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		update projectimage
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="projectId">
+				projectId=#projectId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath1">
+				downloadpath1=#downLoadPath1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath2">
+				downloadpath2=#downLoadPath2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath3">
+				downloadpath3=#downLoadPath3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath4">
+				downloadpath4=#downLoadPath4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath5">
+				downloadpath5=#downLoadPath5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadStatus">
+				downloadstatus=#downLoadStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="hideLine">
+				hideline=#hideLine#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<update id="updateProjectImagePath" parameterClass="com.care.sys.projectimage.domain.ProjectImage">
+		update projectimage 
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="downLoadPath1">
+				downloadpath1=""
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath2">
+				downloadpath2=""
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath3">
+				downloadpath3=""
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath4">
+				downloadpath4=""
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downLoadPath5">
+				downloadpath5=""
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+</sqlMap>

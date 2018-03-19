@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleFuncInfo">
+
+	<select id="getRoleFuncInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_roleFuncInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getRoleFuncInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		SELECT roleCode,funcCode,userCode FROM rolefuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="funcCode">
+			  funcCode=#funcCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleCode">
+			  roleCode=#roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="userCode">
+			  userCode=#userCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+			
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getRoleFuncInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		SELECT 
+		roleDesc,roleName,roleCode,roleType FROM roleinfo  
+		
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+				limit
+				<isNotEmpty prepend=" " property="from">
+				$from$
+				</isNotEmpty>
+				,
+				<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+				</isNotEmpty>
+
+	</select>
+
+	<select id="getRoleFuncInfoListByMap" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.godoing.rose.lang.DataMap">
+		SELECT 
+		roleDesc,roleName,roleCode,roleType FROM roleinfo  
+		
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+				limit
+				<isNotEmpty prepend=" " property="from">
+				$from$
+				</isNotEmpty>
+				,
+				<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+				</isNotEmpty>
+
+	</select>
+
+	<select id="getRoleFuncInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		SELECT COUNT(*) FROM rolefuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getRoleFuncInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM rolefuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertRoleFuncInfo" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		INSERT INTO rolefuncinfo(roleCode,funcCode,userCode) VALUES (#roleCode#,#funcCode#,#userCode#)
+	</insert>
+
+	<update id="updateRoleFuncInfo" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		UPDATE rolefuncinfo SET  roleCode = #roleCode# , funcCode = #funcCode# 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteRoleFuncInfo" parameterClass="com.care.sys.rolefuncinfo.domain.RoleFuncInfo">
+		DELETE FROM rolefuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="funcCode">
+			  funcCode=#funcCode#
+			</isNotEmpty>
+		<isNotEmpty prepend="and" property="roleCode">
+			  rolefuncinfo.roleCode=#roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

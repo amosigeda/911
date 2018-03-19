@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="phoneInfoForm" type="com.care.sys.phoneinfo.form.PhoneInfoForm" />
+    <form-bean name="playItemInfoForm" type="com.care.sys.playiteminfo.form.PlayItemInfoForm" />
+    <form-bean name="settingInfoForm" type="com.care.sys.settinginfo.form.SettingInfoForm" />
+    <form-bean name="relativeCallInfoForm" type="com.care.sys.relativecallinfo.form.RelativeCallInfoForm" />
+    <form-bean name="appUserInfoFrom" type="com.care.sys.appuserinfo.form.AppUserInfoForm" />
+    <form-bean name="locationInfoForm" type="com.care.sys.locationinfo.form.LocationInfoForm" />
+    <form-bean name="deviceActiveInfoForm" type="com.care.sys.deviceactiveinfo.form.DeviceActiveInfoForm" />
+    <form-bean name="checkInfoForm" type="com.care.sys.checkinfo.form.CheckInfoForm" />
+    <form-bean name="feedBackInfoForm" type="com.care.sys.feedbackinfo.form.FeedBackInfoForm" />
+    <form-bean name="shareInfoForm" type="com.care.sys.shareinfo.form.ShareInfoForm" />
+    <form-bean name="msgInfoForm" type="com.care.sys.msginfo.form.MsgInfoForm" />
+    <form-bean name="safeAreaForm" type="com.care.sys.safearea.form.SafeAreaForm" />
+    <form-bean name="companyInfoForm" type="com.care.sys.companyinfo.form.CompanyInfoForm"></form-bean>
+    <form-bean name="channelInfoForm" type="com.care.sys.channelinfo.form.ChannelInfoForm"></form-bean>
+    <form-bean name="projectInfoForm" type="com.care.sys.projectinfo.form.ProjectInfoForm"></form-bean>
+    <form-bean name="saleInfoForm" type="com.care.sys.saleinfo.form.SaleInfoForm"></form-bean>
+    <form-bean name="deviceLoginForm" type="com.care.sys.deviceLogin.form.DeviceLoginForm"></form-bean>
+    <form-bean name="userLoginInfoForm" type="com.care.sys.userlogininfo.form.UserLoginInfoForm"></form-bean>
+    <form-bean name="registerUserForm" type="com.care.sys.sysregisterinfo.form.UserInfoForm"></form-bean>
+    <form-bean name="devicePhoneInfoForm" type="com.care.sys.devicephoneinfo.form.DevicePhoneInfoForm"></form-bean>
+    <form-bean name="projectImageForm" type="com.care.sys.projectimage.form.ProjectImageForm"></form-bean>
+    <form-bean name="dynamicInfoForm" type="com.care.sys.dynamicInfo.form.DynamicInfoForm"></form-bean>
+  </form-beans>
+	<global-forwards>
+    	<forward contextRelative="true" name="error" path="/include/errormsg.jsp" />
+		<forward contextRelative="true" name="result" path="/public/Result.jsp" />
+		<forward contextRelative="true" name="abouts" path="About.htm" />
+	</global-forwards>
+
+	<action-mappings>
+		<action name="appUserInfoFrom" path="/dyconfig/appUserInfo/doAppUserInfo" scope="request" type="com.care.sys.appuserinfo.action.AppUserInfoAction" parameter="method">
+			<forward name="queryAppUserInfo" path="/dyconfig/appUserInfo/appUserInfoMain.jsp" />
+    		<forward name="queryAppUserCount" path="/dyconfig/appUserInfo/appUserCountMain.jsp" />
+    	</action>
+    	
+    	<action name="deviceActiveInfoForm" path="/dyconfig/deviceActiveInfo/doDeviceActiveInfo" scope="request" type="com.care.sys.deviceactiveinfo.action.DeviceActiveInfoAction" parameter="method">
+			<forward name="queryDeviceActiveInfo" path="/dyconfig/deviceActiveInfo/deviceActiveInfoMain.jsp" />
+    		<forward name="queryDeviceActiveCount" path="/dyconfig/deviceActiveInfo/deviceActiveCountMain.jsp" />
+    		<forward name="queryDeviceActiveHistory" path="/dyconfig/deviceActiveInfo/deviceActiveHistoryMain.jsp" />
+    		<forward name="queryAddFriendsInfo" path="/dyconfig/deviceActiveInfo/deviceAddFriends.jsp" />
+    		<forward name="queryCallInfo" path="/dyconfig/deviceActiveInfo/deviceCallInfo.jsp" />
+    		<forward name="queryTalkGroup" path="/dyconfig/deviceActiveInfo/deviceTalkGroup.jsp" />
+    		<forward name="querySportInfo" path="/dyconfig/deviceActiveInfo/deviceSportInfo.jsp" />
+    		<forward name="queryMediaInfo" path="/dyconfig/deviceActiveInfo/deviceMediaInfo.jsp" />
+    	</action>
+    	
+    	<action name="locationInfoForm" path="/dyconfig/locationInfo/doLocationInfo" scope="request" type="com.care.sys.locationinfo.action.LocationInfoAction" parameter="method">
+			<forward name="queryLocationInfo" path="/dyconfig/locationInfo/locationInfoMain.jsp" />
+			<forward name="queryNineOneOneLocationInfo" path="/dyconfig/locationInfo/nineOneOnelocationInfoMain.jsp" />
+    	</action>
+    	
+    	<action name="phoneInfoForm" path="/dyconfig/phoneInfo/doPhoneInfo" scope="request" type="com.care.sys.phoneinfo.action.PhoneInfoAction" parameter="method">
+			<forward name="queryPhoneInfo" path="/dyconfig/phoneInfo/phoneInfoMain.jsp" />
+			<forward name="queryPhoneIMEIInfo" path="/dyconfig/phoneInfo/phoneIMEIInfoMain.jsp"></forward>
+    		<forward name="addimei" path="/dyconfig/phoneInfo/addImei.jsp"></forward>
+    		<forward name="manualInput" path="/dyconfig/phoneInfo/manualInputImei.jsp"></forward>
+    		<forward name="excelInput" path="/dyconfig/phoneInfo/excelInputImei.jsp"></forward>
+			<forward name="textInput" path="/dyconfig/phoneInfo/textInputImei.jsp"></forward>
+    	</action>
+    	
+    	<action name="checkInfoForm" path="/dyconfig/checkInfo/doCheckInfo" scope="request" type="com.care.sys.checkinfo.action.CheckInfoAction" parameter="method">
+			<forward name="queryCheckInfo" path="/dyconfig/checkInfo/checkInfoMain.jsp" />
+    		<forward name="uploadCheckInfo" path="/dyconfig/checkInfo/uploadApk.jsp"></forward>
+    		<forward name="addIDCode" path="/dyconfig/checkInfo/addCheckCode.jsp"></forward>
+    		<forward name="updateRemarks" path="/dyconfig/checkInfo/updateRemarks.jsp"></forward>
+    		<forward name="updateUpUser" path="/dyconfig/checkInfo/updateUpUser.jsp"></forward>
+    	</action>
+    	
+    	<action name="feedBackInfoForm" path="/dyconfig/feedBackInfo/doFeedBackInfo" scope="request" type="com.care.sys.feedbackinfo.action.FeedBackInfoAction" parameter="method">
+			<forward name="queryFeedBackInfo" path="/dyconfig/feedBackInfo/feedBackInfoMain.jsp" />
+			<forward name="updateFeedBackInfo" path="/dyconfig/feedBackInfo/updateFeedBackInfo.jsp"></forward>
+    	</action>
+    	
+    	<action name="relativeCallInfoForm" path="/dyconfig/relativeCallInfo/doRelativeCallInfo" scope="request" type="com.care.sys.relativecallinfo.action.RelativeCallInfoAction" parameter="method">
+			<forward name="queryRelativeCallInfo" path="/dyconfig/relativeCallInfo/relativeCallInfoMain.jsp" />
+    	</action>
+    	
+    	<action name="shareInfoForm" path="/dyconfig/shareInfo/doShareInfo" scope="request" type="com.care.sys.shareinfo.action.ShareInfoAction" parameter="method">
+    		<forward name="queryShareInfo" path="/dyconfig/shareInfo/shareInfoMain.jsp" />
+    	</action>
+    	
+    	<action name="msgInfoForm" path="/dyconfig/msgInfo/doMsgInfo" scope="request" type="com.care.sys.msginfo.action.MsgInfoAction" parameter="method">
+    		<forward name="queryMsgInfo" path="/dyconfig/msgInfo/msgInfoMain.jsp" />
+    	</action>
+    	
+    	<action name="safeAreaForm" path="/dyconfig/safeArea/doSafeArea" scope="request" type="com.care.sys.safearea.action.SafeAreaAction" parameter="method">
+    		<forward name="querySafeArea" path="/dyconfig/safeArea/safeAreaMain.jsp" />
+    	</action>
+    	
+    	<action name="settingInfoForm" path="/dyconfig/settingInfo/doSettingInfo" scope="request" type="com.care.sys.settinginfo.action.SettingInfoAction" parameter="method">
+    		<forward name="querySettingInfo" path="/dyconfig/settingInfo/settingInfoMain.jsp" />
+    	</action>
+    	<action name="companyInfoForm" path="/dyconfig/companyInfo/doCompanyInfo" scope="request" type="com.care.sys.companyinfo.action.CompanyInfoAction" parameter="method">
+			<forward name="queryCompanyInfo" path="/dyconfig/companyInfo/companyInfoMain.jsp" />
+   	 		<forward name="addCompanyInfo" path="/dyconfig/companyInfo/addCompanyInfo.jsp"></forward>
+   	 		<forward name="updateCompanyInfo" path="/dyconfig/companyInfo/updateCompanyInfo.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="channelInfoForm" path="/dyconfig/channelInfo/doChannelInfo" scope="request" type="com.care.sys.channelinfo.action.ChannelInfoAction" parameter="method">
+   	 		<forward name="queryChannelInfo" path="/dyconfig/channelInfo/channelInfoMain.jsp"></forward>
+   	 		<forward name="addChannelInfo" path="/dyconfig/channelInfo/addChannelInfo.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="projectInfoForm" path="/dyconfig/projectInfo/doProjectInfo" scope="request" type="com.care.sys.projectinfo.action.ProjectInfoAction" parameter="method">
+   	 		<forward name="queryProjectInfo" path="/dyconfig/projectInfo/projectInfoMain.jsp"></forward>
+   	 		<forward name="addProjectInfo" path="/dyconfig/projectInfo/addProjectInfo.jsp"></forward>
+   	 		<forward name="updateProjectInfo" path="/dyconfig/projectInfo/updateProjectInfo.jsp"></forward>
+   	 		<forward name="updateProjectSwitchInfo" path="/dyconfig/projectInfo/updateProjectSwitchInfo.jsp"></forward>
+   	 		<forward name="projectRoleFuncInfo"  path="/dyconfig/projectInfo/projectRoleFuncPop.jsp"></forward>
+   	 		<forward name="querySwitchInfo"  path="/dyconfig/projectInfo/projectSwitch.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="saleInfoForm" path="/dyconfig/saleInfo/doSaleInfo" scope="request" type="com.care.sys.saleinfo.action.SaleInfoAction" parameter="method">
+   	 		<forward name="querySaleInfo" path="/dyconfig/saleInfo/saleInfoMain.jsp"></forward>
+   	 		<forward name="querySaleAreaInfo" path="/dyconfig/saleInfo/saleAreaMain.jsp"></forward>
+   	 		<forward name="queryDayAddInfo" path="/dyconfig/saleInfo/dayAddMain.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="userLoginInfoForm" path="/dyconfig/userLoginInfo/doUserLoginInfo" scope="request" type="com.care.sys.userlogininfo.action.UserLoginInfoAction" parameter="method">
+   	 		<forward name="queryUserLoginInfo" path="/dyconfig/userLoginInfo/userLoginInfoMain.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="deviceLoginForm" path="/dyconfig/deviceActiveInfo/doDeviceLogin" scope="request" type="com.care.sys.deviceLogin.action.DeviceLoginAction" parameter="method">
+   	 		<forward name="queryDeviceLogin" path="/dyconfig/deviceLogin/deviceLogin.jsp"></forward>
+   	 	</action>
+  	 
+   	 	<action name="registerUserForm" path="/dyconfig/userRegisterInfo/doRegisterUser" scope="request" type="com.care.sys.sysregisterinfo.action.SysRegisterInfoAction" parameter="method">
+   	 		<forward name="queryRegisterInfo" path="/dyconfig/userRegisterInfo/userRegisterInfoMain.jsp"></forward>
+   	 		<forward name="changeRoleInfo" path="/dyconfig/userRegisterInfo/changeRoleInfo.jsp"></forward>
+   	 		<forward name="changeTagInfo" path="/dyconfig/userRegisterInfo/changeTagInfo.jsp"></forward>
+   	 		<forward name="success" path="/dyconfig/userRegisterInfo/success.jsp"></forward>
+   	 		<forward name="fail" path="/dyconfig/userRegisterInfo/fail.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="devicePhoneInfoForm" path="/dyconfig/devicePhoneInfo/doDevicePhoneInfo" scope="request" type="com.care.sys.devicephoneinfo.action.DevicePhoneInfoAction" parameter="method">
+   	 		<forward name="queryDevicePhoneInfo" path="/dyconfig/devicePhoneInfo/devicePhoneInfoMain.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="projectImageForm" path="/dyconfig/projectImage/doProjectImage" scope="request" type="com.care.sys.projectimage.action.ProjectImageAction" parameter="method">
+   	 		<forward name="queryProjectImage" path="/dyconfig/projectImage/projectImageMain.jsp"></forward>
+   	 		<forward name="uploadImage" path="/dyconfig/projectImage/uploadImage.jsp"></forward>
+   	 		<forward name="projectImageUpdate" path="/dyconfig/projectImage/projectImageUpdate.jsp"></forward>
+   	 	</action>
+   	 	
+   	 	<action name="dynamicInfoForm" path="/dyconfig/dynamicInfo/doDynamicInfo" scope="request" type="com.care.sys.dynamicInfo.action.DynamicInfoAction" parameter="method">
+   	 	   <forward name="dynamicInfo" path="/dyconfig/dynamicInfo/dynamicInfoMain.jsp"></forward> 
+   	 	   <forward name="addDynamicInfo" path="/dyconfig/dynamicInfo/addDynamicInfo.jsp"></forward> 
+   	 	   <forward name="updateDynamicInfo" path="/dyconfig/dynamicInfo/updateDynamicInfo.jsp"></forward> 
+   	 	</action>
+	</action-mappings>
+	
+    <message-resources parameter="ApplicationResources" />
+</struts-config>

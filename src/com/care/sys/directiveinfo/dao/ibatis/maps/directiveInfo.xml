@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DirectiveInfo">
+	
+	<select id="getDirectiveInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.directiveinfo.domain.DirectiveInfo">
+		SELECT * FROM directive
+		<dynamic prepend="where"> 
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
+	
+	<select id="getDirectiveInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.directiveinfo.domain.DirectiveInfo">
+		SELECT * FROM directive  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getDirectiveInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.directiveinfo.domain.DirectiveInfo">
+	   SELECT COUNT(id) FROM directive
+		<dynamic prepend="where"> 
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<insert id="insertDirectiveInfo" parameterClass="com.care.sys.directiveinfo.domain.DirectiveInfo">
+		INSERT INTO directive(serie_no,distrub,mdistime,tdistime,wdistime,lowelectricity,isLow,clock,sleep,thdistime,fdistime,sdistime,sudistime,distrubChange,alarmChange,sleepChange,belong_project) VALUES (#serie_no#,#distrub#,#mdistime#,#tdistime#,#wdistime#,#lowelectricity#,#isLow#,#clock#,#sleep#,#thdistime#,#fdistime#,#sdistime#,#sudistime#,#distrubChange#,#alarmChange#,#sleepChange#,#belongProject#)
+	</insert>
+	
+	<update id="updateDirectiveInfo" parameterClass="com.care.sys.directiveinfo.domain.DirectiveInfo">
+		UPDATE directive
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="distrub">
+				distrub=#distrub#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mdistime">
+				mdistime=#mdistime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tdistime">
+				tdistime=#tdistime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="wdistime">
+				wdistime=#wdistime#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="lowelectricity">
+				lowelectricity=#lowelectricity#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="isLow">
+				isLow=#isLow#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="clock">
+				clock=#clock#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sleep">
+				sleep=#sleep#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="thdistime">
+				thdistime=#thdistime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fdistime">
+				fdistime=#fdistime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sdistime">
+				sdistime=#sdistime#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="sudistime">
+				sudistime=#sudistime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="distrubChange">
+				distrubChange=#distrubChange#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="alarmChange">
+				alarmChange=#alarmChange#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sleepChange">
+				sleepChange=#sleepChange#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	
+</sqlMap>

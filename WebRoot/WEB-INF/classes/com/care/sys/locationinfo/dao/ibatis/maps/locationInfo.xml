@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="locationInfo">
+
+	<select id="getLocationInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT 
+  l.*,
+  p.project_name 
+FROM
+  locationinfo l
+  LEFT JOIN projectinfo p
+  ON l.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="limit">
+		   <isNotEmpty prepend=" " property="from">
+		      $from$
+		   </isNotEmpty>
+		   ,
+		   <isNotEmpty prepend=" " property="pageSize">
+		      $pageSize$
+		   </isNotEmpty>
+		</dynamic>
+	</select>	
+	<select id="getNineOneOneLocationInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT 
+  * from T_DEVICE_LOCATION
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="limit">
+		   <isNotEmpty prepend=" " property="from">
+		      $from$
+		   </isNotEmpty>
+		   ,
+		   <isNotEmpty prepend=" " property="pageSize">
+		      $pageSize$
+		   </isNotEmpty>
+		</dynamic>
+	</select>	
+	<select id="getLocationListInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT * FROM locationinfo l
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$ 
+			</isNotEmpty>
+		</dynamic>
+	</select>	
+	
+		<select id="insertNineOneOneGetSetInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT * FROM device_set 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>	
+	
+	
+		<select id="getNineOneOneLocationInfoList" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT * FROM T_DEVICE_LOCATION 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>	
+	
+	<select id="getLocationInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.locationinfo.domain.LocationInfo" >
+		SELECT 
+  COUNT(*) 
+FROM
+  locationinfo l 
+  LEFT JOIN
+  projectinfo p
+  ON l.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getLocationInfoGroupByTime" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		SELECT * FROM locationinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		GROUP BY SUBSTRING(upload_time,1,10)
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$ 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertLocationInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		INSERT INTO locationinfo(serie_no,battery,longitude,latitude,location_type,accuracy,upload_time,change_longitude,change_latitude,belong_project,s_t,e_t,fall,step_no,roll_no,t_alarm,t_status,cause,map,address,radius,imei,altitude,satellite,speed,is_gps,angle,driver_status,driver_count,type,device) 
+		VALUES (#serieNo#,#battery#,#longitude#,#latitude#,#locationType#,#accuracy#,#uploadTime#,#changeLongitude#,#changeLatitude#,#belongProject#,#showType#,#endTime#,#fall#,#stepNo#,#rollNo#,#tAlarm#,#tStatus#,#cause#,#map#,#address#,#radius#,#imei#,#altitude#,#satellite#,#speed#,#isGps#,#angle#,#driverStatus#,#driverCount#,#type#,#device#)
+	</insert>
+	
+	<insert id="insertNineOneOneLocationInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		INSERT INTO T_DEVICE_LOCATION
+		(TRANSACTION_CODE,DEVICE_SERIAL_NUMBER,LAT,LON,ELECTRIC_QUANTITY,TIMESTAMP,INSERT_TIME,SPEED,ELEVATION,DIRECTION,BAT_STATUS,FLY,OBJ_ID,ADDRESS) 
+		VALUES (#belongProject#,#serieNo#,#latitude#,#longitude#,#battery#,#cause#,#endTime#,#speed#,#altitude#,#angle#,#stepNo#,#rollNo#,#isGps#,#address#)
+	</insert>
+	
+	<insert id="insertNineOneOneWarnInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		INSERT INTO T_DEVICE_WARN
+		(OBJ_ID,TRANSACTION_CODE,DEVICE_SERIAL_NUMBER,WARN_TYPE,TIMESTAMP,INSERT_TIME) 
+		VALUES (#address#,#cellId#,#altitude#,#accuracy#,#cause#,#endTime#)
+	</insert>
+	
+	  
+		<insert id="insertNineOneOneBindInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		INSERT INTO T_DEVICE_CONFIMBIND
+		(OBJ_ID,TRANSACTION_CODE,DEVICE_SERIAL_NUMBER,DEVICE_TIMESTAMP,INSERT_TIME) 
+		VALUES (#address#,#cellId#,#altitude#,#cause#,#endTime#)
+	</insert>
+	
+	<insert id="insertNineOneOneQiyaInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		INSERT INTO T_DEVICE_UPMSG
+		(OBJ_ID,TRANSACTION_CODE,DEVICE_SERIAL_NUMBER,MODE,TIMESTAMP,INSERT_TIME) 
+		VALUES
+	   (#address#,#cellId#,#altitude#,#accuracy#,#cause#,#endTime#)
+	</insert>
+	
+		
+	<insert id="insertLocationInfoBackup" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		insert into locationinfo_backup(serie_no,battery,longitude,latitude,location_type,accuracy,upload_time,change_longitude,
+								 change_latitude,belong_project,s_t,e_t,fall,step_no,roll_no,t_alarm,t_status)
+		select serie_no,battery,longitude,latitude,location_type,accuracy,upload_time,change_longitude,
+								 change_latitude,belong_project,s_t,e_t,fall,step_no,roll_no,t_alarm,t_status from locationinfo						 								 
+		<dynamic prepend="where">			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>		
+	</insert>
+	
+    <update id="updateLocationInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		UPDATE locationinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="uploadTime">
+				upload_time=#uploadTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="endTime">
+				e_t=#endTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="longitude">
+				longitude=#longitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="latitude">
+				latitude=#latitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="changeLongitude">
+				change_longitude=#changeLongitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="changeLatitude">
+				change_latitude=#changeLatitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fall">
+				fall=#fall#
+			</isNotEmpty>											
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	
+	   <update id="updateSetInfoStatus" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		UPDATE device_set
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="angle">
+				GET_STATUS=#angle#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="endTime">
+				GET_TIME=#endTime#
+			</isNotEmpty>
+													
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<delete id="deleteLocationInfo" parameterClass="com.care.sys.locationinfo.domain.LocationInfo">
+		delete from locationinfo
+		<dynamic prepend="where">
+			<isNotEmpty property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+		<select id="getNineOneOneLocationInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.locationinfo.domain.LocationInfo" >
+		SELECT 
+  COUNT(*) 
+FROM
+ T_DEVICE_LOCATION
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+		
+</sqlMap>

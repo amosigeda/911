@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AppUserInfo">
+	
+	<select id="getAppUserInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT * FROM appuserinfo
+		<dynamic prepend="where"> 
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getAppUserInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT a.*,p.project_name project,s.count_share count_share,sa.*,count_device FROM appuserinfo a LEFT JOIN projectinfo p ON a.belong_project=p.id LEFT JOIN saleinfo sa ON a.user_name=sa.user_name LEFT JOIN (SELECT COUNT(id) count_share,user_id FROM share_info WHERE is_priority='0' GROUP BY user_id) s ON a.id=s.user_id LEFT JOIN (SELECT COUNT(id) count_device,user_id FROM device_active_info WHERE device_disable='1' GROUP BY user_id) d ON a.id=d.user_id
+		<dynamic prepend="where">			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getAppUserInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+	   SELECT COUNT(*) FROM appuserinfo
+		<dynamic prepend="where"> 			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getAppUserInfoCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+	   SELECT COUNT(*) FROM appuserinfo a LEFT JOIN projectinfo p ON a.belong_project=p.id LEFT JOIN saleinfo sa ON a.user_name=sa.user_name LEFT JOIN (SELECT COUNT(id) count_share,user_id FROM share_info WHERE is_priority='0' GROUP BY user_id) s ON a.id=s.user_id LEFT JOIN (SELECT COUNT(id) count_device,user_id FROM device_active_info WHERE device_disable='1' GROUP BY user_id) d ON a.id=d.user_id
+		<dynamic prepend="where"> 			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertAppUserInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		INSERT INTO appuserinfo(user_name,password,nick_name,age,sex,create_time,lastlogin_time,height,weight,belong_project,bind_count) 
+		VALUES (#userName#,#password#,#nickName#,#age#,#sex#,#createTime#,#lastLoginTime#,#userHeight#,#userWeight#,#belongProject#,#bindCount#)
+	</insert>
+	
+	<update id="updateAppUserInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		UPDATE appuserinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="password">
+				password=#password#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="nickName">
+				nick_name=#nickName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="age">
+				age=#age#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sex">
+				sex=#sex#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="lastLoginTime">
+				lastlogin_time=#lastlogin_time#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="head">
+				head=#head#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="userWeight">
+				weight=#userWeight#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="userHeight">
+				height=#userHeight#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="belongProject">
+				belong_project=#belongProject#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="bindCount">
+				bind_count=#bindCount#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<select id="getAppUserInfoGroupByTime" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT COUNT(id) AS id,create_time FROM appuserinfo 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		GROUP BY SUBSTRING(create_time,1,10)
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+			,
+			<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getAppUserInfoCountGroupByTime" resultClass="java.lang.Integer" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT COUNT(DISTINCT(SUBSTRING(create_time,1,10))) FROM appuserinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+</sqlMap>

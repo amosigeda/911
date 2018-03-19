@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="relativeCallInfo">
+
+	<select id="getRelativeCallInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		SELECT * FROM relativecallinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getMaxCountRelativeCallInfo" resultClass="java.lang.Integer" parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+	   select max(id) from relativecallinfo
+	</select>
+	<select id="getRelativeCallInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		SELECT r.*,a.user_name,p.project_name FROM relativecallinfo r LEFT JOIN appuserinfo a ON r.user_id=a.id LEFT JOIN projectinfo p ON r.belong_project=p.id 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getRelativeCallInfoCount" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		SELECT COUNT(*) FROM relativecallinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getRelativeCallInfoCountByVo" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		SELECT COUNT(r.id) FROM relativecallinfo r LEFT JOIN appuserinfo a ON r.user_id=a.id LEFT JOIN projectinfo p ON r.belong_project=p.id 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertRelativeCallInfo"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		INSERT INTO relativecallinfo
+		(serie_no,relative_type,phone_number,nick_name,status,user_id,add_time,belong_project,short_number) VALUES
+		(#serieNo#,#relativeType#,#phoneNumber#,#nickName#,#status#,#userId#,#addTime#,#belongProject#,#shortNumber#)
+	</insert>
+
+	<update id="updateRelativeCallInfoStatus"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		UPDATE relativecallinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="serieNo">
+				serie_no=#serieNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<update id="updateRelativeCallInfo"
+		parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		UPDATE relativecallinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="relativeType">
+				relative_type=#relativeType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="phoneNumber">
+				phone_number=#phoneNumber#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="nickName">
+				nick_name=#nickName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="shortNumber">
+				short_number=#shortNumber#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	<delete id="deleteRelativeCallInfo" parameterClass="com.care.sys.relativecallinfo.domain.RelativeCallInfo">
+		DELETE FROM relativecallinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

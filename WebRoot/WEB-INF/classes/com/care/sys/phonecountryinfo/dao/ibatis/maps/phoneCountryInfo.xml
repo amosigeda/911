@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="phonecountryinfo">
+	<select  id="getPhoneCountryInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.phonecountryinfo.domain.PhoneCountryInfo">
+		select*from phone_country_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+</sqlMap>

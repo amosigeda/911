@@ -1,0 +1,28 @@
+.result_err {
+	background-color: #FCEBEF;
+	font-size: 12px;
+	border: 1px solid #FF8686;
+	color: #A64211;
+}
+.result_ces {
+	background-color: #F9E3D5;
+	font-size: 12px;
+	border: 1px solid #F7C6A6;
+	color: #A64211;
+}
+.result_err_btn {
+	background-color: #FDD9C1;
+	border: 1px solid #9E4316;
+	letter-spacing: 4px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+.result_ces_btn {
+	background-color: #A5CAFC;
+	border: 1px solid #D4D0C8;
+	letter-spacing: 4px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}

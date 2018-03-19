@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<sqlMap resource="com/care/sys/userinfo/dao/ibatis/maps/userInfo.xml"/>
+	<sqlMap resource="com/care/sys/funcinfo/dao/ibatis/maps/funcInfo.xml"/>
+	<sqlMap resource="com/care/sys/roleinfo/dao/ibatis/maps/roleInfo.xml"/>
+	<sqlMap resource="com/care/sys/rolefuncinfo/dao/ibatis/maps/roleFuncInfo.xml"/>
+	<sqlMap resource="com/care/sys/sysloginfo/dao/ibatis/maps/sysLogInfo.xml"/>
+	<sqlMap resource="com/care/sys/monitorinfo/dao/ibatis/maps/monitorInfo.xml"/> 
+	<sqlMap resource="com/care/sys/phoneinfo/dao/ibatis/maps/phoneInfo.xml"/>
+	<sqlMap resource="com/care/sys/playiteminfo/dao/ibatis/maps/playItemInfo.xml"/>
+	<sqlMap resource="com/care/sys/settinginfo/dao/ibatis/maps/settingInfo.xml"/>
+	<sqlMap resource="com/care/sys/relativecallinfo/dao/ibatis/maps/relativeCallInfo.xml"/>
+	<sqlMap resource="com/care/sys/appuserinfo/dao/ibatis/maps/appUserInfo.xml"/>
+	<sqlMap resource="com/care/sys/locationinfo/dao/ibatis/maps/locationInfo.xml" />
+	<sqlMap resource="com/care/sys/deviceactiveinfo/dao/ibatis/maps/deviceActiveInfo.xml"/>
+	<sqlMap resource="com/care/sys/safearea/dao/ibatis/maps/safearea.xml"/>
+	<sqlMap resource="com/care/sys/feedbackinfo/dao/ibatis/maps/feedBackInfo.xml" />
+	<sqlMap resource="com/care/sys/checkinfo/dao/ibatis/maps/checkInfo.xml"/>
+	<sqlMap resource="com/care/sys/shareinfo/dao/ibatis/maps/share_info.xml"/>
+	<sqlMap resource="com/care/sys/msginfo/dao/ibatis/maps/msg_info.xml"/>
+	<sqlMap resource="com/care/sys/directiveinfo/dao/ibatis/maps/directiveInfo.xml"/>
+	<sqlMap resource="com/care/sys/companyinfo/dao/ibatis/maps/companyInfo.xml"/>
+	<sqlMap resource="com/care/sys/channelinfo/dao/ibatis/maps/channelInfo.xml"/>
+	<sqlMap resource="com/care/sys/projectinfo/dao/ibatis/maps/projectInfo.xml"/>
+	<sqlMap resource="com/care/sys/saleinfo/dao/ibatis/maps/saleInfo.xml"/>
+	<sqlMap resource="com/care/sys/userlogininfo/dao/ibatis/maps/userLoginInfo.xml"/>
+	<sqlMap resource="com/care/sys/deviceLogin/dao/ibatis/maps/device_login.xml"/>
+	<sqlMap resource="com/care/sys/sysregisterinfo/dao/ibatis/maps/sysRegisterInfo.xml"/>
+	<sqlMap resource="com/care/sys/phonecountryinfo/dao/ibatis/maps/phoneCountryInfo.xml"/>
+	<sqlMap resource="com/care/sys/devicephoneinfo/dao/ibatis/maps/devicePhoneInfo.xml"/>
+	<sqlMap resource="com/care/sys/projectimage/dao/ibatis/maps/projectImage.xml"/>
+	<sqlMap resource="com/care/sys/dynamicInfo/dao/ibatis/maps/dynamicInfo.xml"/>
+</sqlMapConfig>

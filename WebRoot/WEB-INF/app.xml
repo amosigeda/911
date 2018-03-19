@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GB2312"?>
+<App>
+	<config>
+		<sms>
+			<smsLengthZh>70</smsLengthZh>
+			<smsLengthEn>160</smsLengthEn>
+			<smsStartMsg>帝馨软件公司</smsStartMsg>
+			<smsEndMsg>系统发送,请勿直接回复</smsEndMsg>
+	   </sms>
+		<FileUpload>
+			<UploadAction>uploadAction</UploadAction>
+			<UserFileUpload>
+				<MaxFileSize>10000</MaxFileSize>
+				<AllowedFilesList>txt</AllowedFilesList>
+				<FileName>userinfo</FileName>
+				<BackFile>UserUploadFile.jsp</BackFile>
+			</UserFileUpload>
+			<ProductUploadImg>
+				<MaxFileSize>5000000</MaxFileSize>
+				<AllowedFilesList>jpg,bmp,png</AllowedFilesList>
+				<FileName>product</FileName>
+				<ChildFileName>productCode</ChildFileName>
+				<BackFile>productImgFrame.jsp</BackFile>
+			</ProductUploadImg>
+		</FileUpload>
+		<ExlImgProduct>产品编号,productCode,String,true#名称,brandName,String,true#中文名称,brandCnName,String,true#品牌标示,brandTag,String,true#级别,wordbookCode,String,true#采购价格,stockPrice,String,true#会员价格,vipPrice,String,true#批发价格,wholesalePrice,String,true#零售价格,retailPrice,String,true#库存总量,counts,String,true#图片,productCode,Img,true</ExlImgProduct>
+	</config>
+</App>

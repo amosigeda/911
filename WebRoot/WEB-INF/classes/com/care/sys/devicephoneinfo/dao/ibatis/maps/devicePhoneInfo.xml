@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="devicephoneinfo">
+	<select id="getDevicePhoneInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.devicephoneinfo.domain.DevicePhoneInfo">
+		select * from device_phone_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getDevicePhoneInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.devicephoneinfo.domain.DevicePhoneInfo">
+		select * from device_phone_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend="" property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend="" property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getDevicePhoneInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.devicephoneinfo.domain.DevicePhoneInfo">
+		select count(1) from device_phone_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertDevicePhoneInfo" parameterClass="com.care.sys.devicephoneinfo.domain.DevicePhoneInfo">
+		insert into device_phone_info(device_phone,device_imsi,device_name,belong_project,firm,country)values(#devicePhone#,#deviceImsi#,#deviceName#,#belongProject#,#firm#,#country#)
+	</insert>
+		
+</sqlMap>

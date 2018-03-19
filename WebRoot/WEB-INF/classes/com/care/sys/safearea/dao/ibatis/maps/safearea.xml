@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="whiteListInfo">
+
+	<select id="getSafeArea" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.safearea.domain.SafeArea">
+		SELECT * FROM safe_area
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getSafeAreaMaxCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.safearea.domain.SafeArea">
+	   select max(id) from safe_area
+	</select>
+	<insert id="insertSafeArea" parameterClass="com.care.sys.safearea.domain.SafeArea">
+		INSERT INTO safe_area(seri_no,longitude,latitude,safe_range,area_name,area_effect_time,create_time,safe_address,user_id,status,belong_project) VALUES (#seriNo#,#longitude#,#latitude#,#safe_range#,#area_name#,#area_effect_time#,#create_time#,#safeAddress#,#userId#,#status#,#belongProject#)
+	</insert>
+    
+    <update id="updateSafeArea" parameterClass="com.care.sys.safearea.domain.SafeArea">
+		UPDATE safe_area
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="longitude">
+				longitude=#longitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="latitude">
+				latitude=#latitude#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="safe_range">
+				safe_range=#safe_range#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="area_name">
+				area_name=#area_name#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="area_effect_time">
+				area_effect_time=#area_effect_time#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="update_time">
+				update_time=#update_time#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="safeAddress">
+				safe_address=#safeAddress#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<delete id="deleteSafeArea" parameterClass="com.care.sys.safearea.domain.SafeArea">
+		DELETE FROM safe_area
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$ 
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+	<select id="getSafeAreaListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.safearea.domain.SafeArea">
+		SELECT s.*,a.user_name,p.project_name project FROM safe_area s LEFT JOIN appuserinfo a ON s.user_id=a.id
+				LEFT JOIN projectinfo p ON p.id= s.belong_project
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getSafeAreaCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.safearea.domain.SafeArea">
+	   SELECT COUNT(s.id) FROM safe_area s LEFT JOIN appuserinfo a ON s.user_id=a.id
+		<dynamic prepend="where"> 
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MonitorInfo">
+
+	<select id="getMonitorInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT start_time,end_time,cost_time,id,function,function_href FROM monitorinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="startTime">
+				start_time=#startTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getMonitorInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT start_time,end_time,cost_time,id,function,function_href FROM monitorinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+				limit
+				<isNotEmpty prepend=" " property="from">
+				$from$
+				</isNotEmpty>
+				,
+				<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+				</isNotEmpty>
+	</select>
+
+	<select id="getMonitorInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT COUNT(*) FROM monitorinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertMonitorInfo" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		INSERT INTO monitorinfo(start_time,end_time,cost_time,function,function_href) VALUES (#startTime#,#endTime#,#costTime#,#functions#,#,functionHref#)
+	</insert>
+	<insert id="insertMonitorInfoBf" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		INSERT INTO monitorinfo_beifen(id,start_time,end_time,cost_time,function,function_href) 
+		select * from monitorinfo
+		<dynamic prepend="where">			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>	
+	</insert>
+	
+	<!-- 监听工具 -->
+	<select id="getVisitInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT start_time,phone,belong_project,id,function,function_href FROM visit
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getVisitInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT v.*,a.user_name,p.project_name FROM visit v LEFT JOIN appuserinfo a ON v.phone=a.id LEFT JOIN projectinfo p ON v.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="type">
+				v.type=$type$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+				limit
+				<isNotEmpty prepend=" " property="from">
+				$from$
+				</isNotEmpty>
+				,
+				<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+				</isNotEmpty>
+	</select>
+
+	<select id="getVisitInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT COUNT(v.id) FROM visit v LEFT JOIN appuserinfo a ON v.phone=a.id LEFT JOIN projectinfo p ON v.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="type">
+				v.type=$type$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertVisitInfo" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		INSERT INTO visit(start_time,end_time,cost_time,type,phone,belong_project,function,function_href,len) VALUES (#startTime#,#endTime#,#costTime#,#type#,#phone#,#belongProject#,#functions#,#,functionHref#,#len#)
+	</insert>
+	
+	
+	<!-- 开关 -->
+	<select id="getSwitchInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		SELECT * FROM switch_info
+	</select>
+	
+	<update id="updateSwitchInfo" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		UPDATE switch_info
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="visit_s">
+				visit_s=#visit_s#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="moni_s">
+				moni_s=#moni_s#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="device_s">
+				device_s=#device_s#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<insert id="insertVisitBackup" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		insert into visit_backup(phone,function,function_href,belong_project,start_time,type,end_time,cost_time,len)
+		select phone,function,function_href,belong_project,start_time,type,end_time,cost_time,len
+		from visit
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</insert>
+	
+	<delete id="deleteVisit" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		delete from visit
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	<delete id="deleteMonitorInfo" parameterClass="com.care.sys.monitorinfo.domain.MonitorInfo">
+		delete from monitorinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+</sqlMap>

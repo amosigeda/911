@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $Id: test.html,v 1.1 2010/11/01 06:35:03 hepx Exp $ -->
+
+<head>
+<meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+<title>The Coolest DHTML Calendar - Online Demo</title>
+<link rel="stylesheet" type="text/css" media="all" href="skins/aqua/theme.css" title="Aqua" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-blue.css" title="winter" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-blue2.css" title="blue" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-brown.css" title="summer" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-green.css" title="green" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-win2k-1.css" title="win2k-1" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-win2k-2.css" title="win2k-2" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-win2k-cold-1.css" title="win2k-cold-1" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-win2k-cold-2.css" title="win2k-cold-2" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="calendar-system.css" title="system" />
+
+<!-- import the calendar script -->
+<script type="text/javascript" src="calendar.js"></script>
+
+<!-- import the language module -->
+<script type="text/javascript" src="lang/calendar-zh.js"></script>
+<script type="text/javascript" src="lang/calendar-setup.js"></script>
+
+<!-- other languages might be available in the lang directory; please check
+your distribution archive. -->
+
+<!-- helper script that uses the calendar -->
+<script type="text/javascript">
+
+</script>
+<body>
+<input type="text" name="date1" id="sel1" size="30" />
+<input type="reset" value=" ... "onclick="return showCalendar('sel1', '%Y-%m-%d [%W] %H:%M', '24', true);" />
+</body>
+</html>

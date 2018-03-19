@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="saleInfo">
+	<select id="getSaleInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		SELECT * FROM saleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertSaleInfo" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		INSERT INTO saleinfo
+		(user_name,imei,imsi,phone,phone_model,sys_version,province,belong_project,date_time,ip,app_version,device_type) 
+		VALUES 
+		(#userName#,#imei#,#imsi#,#phone#,#phoneModel#,#sysVersion#,#province#,#belongProject#,#dateTime#,#ip#,#appVersion#,#deviceType#)
+	</insert>
+	
+	<update id="updateSaleInfo" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		UPDATE saleinfo 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="imei">
+		      imei=#imei#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="imsi">
+		      imsi=#imsi#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="phone">
+		      phone=#phone#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="phoneModel">
+		      phone_model=#phoneModel#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sysVersion">
+		      sys_version=#sysVersion#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="province">
+		      province=#province#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="belongProject">
+		      belong_project=#belongProject#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="ip">
+		      ip=#ip#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="appVersion">
+		      app_version=#appVersion#
+			</isNotEmpty>
+		</dynamic>  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<delete id="deleteSaleInfo" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		DELETE FROM saleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$ 
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+	<select id="getSaleInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		SELECT 
+  s.* ,p.`project_name`
+FROM
+  saleinfo  s LEFT JOIN projectinfo p ON s.`belong_project`=p.`id`
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getSaleInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.saleinfo.domain.SaleInfo" >
+		SELECT COUNT(*) FROM saleinfo s
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getSaleInfoListGroupByProvince" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		SELECT COUNT(id) id,province FROM saleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		GROUP BY province
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getSaleInfoCountGroupByProvince" resultClass="java.lang.Integer" parameterClass="com.care.sys.saleinfo.domain.SaleInfo" >
+		SELECT COUNT(DISTINCT(province)) FROM saleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getAddDayGroupByTime" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.saleinfo.domain.SaleInfo" >
+		SELECT * FROM v_device_login d LEFT JOIN v_appuser USING(belong_project,add_time) LEFT JOIN v_device_active USING(belong_project,add_time) LEFT JOIN v_userlogin USING(belong_project,add_time) LEFT JOIN v_device_active_history USING(belong_project,add_time) LEFT JOIN projectinfo p ON d.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getCountAddDayGroupByTime" resultClass="java.lang.Integer" parameterClass="com.care.sys.saleinfo.domain.SaleInfo">
+		SELECT COUNT(*) FROM v_device_login
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="addTime">
+				$addTime$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+</sqlMap>

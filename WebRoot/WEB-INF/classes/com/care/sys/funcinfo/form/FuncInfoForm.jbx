@@ -1,0 +1,14 @@
+[PropertyInfo]
+funcCode,String,false,false, , ,true,<default>
+funcDesc,String,false,false, , ,true,<default>
+funcDo,String,false,false, , ,true,<default>
+funcName,String,false,false, , ,true,<default>
+funcSort,Long,false,false, , ,true,<default>
+levels,Long,false,false, , ,true,<default>
+status,String,false,false, , ,true,<default>
+superCode,String,false,false,superCode,superCode,true,<default>
+[IconNames]
+
+
+
+

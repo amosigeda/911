@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="channelInfo">
+
+	<select id="getChannelInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
+		SELECT * FROM channelinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getChannelInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
+		SELECT * FROM channelinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		
+	</select>
+	
+	<select id="getChannelInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
+		SELECT COUNT(*) FROM channelinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getChannelInfoMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
+		SELECT MAX(id) FROM channelinfo
+	</select>
+	
+	<insert id="insertChannelInfo" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
+		INSERT INTO channelinfo (id,channel_no,channel_name,add_time,remark,status) VALUES 
+		(#id#,#channelNo#,#channelName#,#addTime#,#remark#,#status#)
+	</insert>
+	
+</sqlMap>

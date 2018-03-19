@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleInfo">
+
+	<select id="getRoleInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_roleInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getRoleInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		SELECT id,roleDesc,roleName,roleCode,roleType FROM roleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="roleCode">
+			  roleCode=#roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleType">
+			  roleType=#roleType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+    <!-- pageSize是跳转获取的页码显示行数 -->
+	<select id="getRoleInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		SELECT 
+		id,roleDesc,roleName,roleCode,roleType FROM roleinfo  
+		
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+				limit
+				<isNotEmpty prepend=" " property="from">
+				$from$
+				</isNotEmpty>
+				,
+				<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+				</isNotEmpty>
+
+	</select>
+
+	<select id="getRoleInfoListByMap" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.godoing.rose.lang.DataMap">
+		SELECT Top
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+		roleDesc,roleName,roleCode,roleType FROM roleinfo Where (
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+			NOT IN (SELECT TOP
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+		FROM roleinfo
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			)
+		)
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getRoleInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		SELECT COUNT(*) FROM roleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="roleCode">
+			  roleCode=#roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleName">
+			  roleName=#roleName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getRoleInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM roleinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertRoleInfo" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		INSERT INTO roleinfo(roleDesc,roleName,roleCode,roleType) VALUES (#roleDesc#,#roleName#,#roleCode#,#roleType#)
+	</insert>
+
+	<update id="updateRoleInfo" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		UPDATE roleinfo SET  roleDesc = #roleDesc# , roleName = #roleName# ,roleType = #roleType#
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="roleCode">
+			  roleCode=#roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteRoleInfo" parameterClass="com.care.sys.roleinfo.domain.RoleInfo">
+		DELETE FROM roleinfo
+		<dynamic prepend="where">
+		    <isNotEmpty prepend="and" property="roleCode">
+			  RoleInfo.roleCode=#roleCode#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

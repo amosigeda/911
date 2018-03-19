@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DeviceLogin">
+	<select id="getDeviceLogin" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		SELECT * FROM (SELECT d.*,COUNT(d.id) count_num,p.project_name project FROM device_login d LEFT JOIN projectinfo p ON d.belong_project=p.id GROUP BY SUBSTRING(d.date_time,1,10),d.device_imei) s
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		     limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getDeviceLoginCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		SELECT COUNT(*) FROM (SELECT d.*,COUNT(d.id) count_num,p.project_name project FROM device_login d LEFT JOIN projectinfo p ON d.belong_project=p.id GROUP BY SUBSTRING(d.date_time,1,10),d.device_imei) s
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getDeviceLoginGroupByProject" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		SELECT date_time,belong_project,COUNT(id) count_device_login FROM device_login
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>			
+		</dynamic>
+		GROUP BY belong_project,SUBSTRING(date_time,1,10) limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getDeviceLoginCountGroupByProject" resultClass="java.lang.Integer" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		SELECT COUNT(id) from device_login
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>			
+		</dynamic>
+		GROUP BY belong_project,SUBSTRING(date_time,1,10)
+	</select>
+
+	<select id="getDeviceLoginCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM device_login
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertDeviceLogin" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		INSERT INTO device_login(device_imei,device_phone,device_version,device_status,date_time,belong_project) VALUES (#deivceImei#,#devicePhone#,#deviceVersion#,#deviceStatus#,#dateTime#,#belongProject#)
+	</insert>
+
+	<delete id="deleteDeviceLogin" parameterClass="com.care.sys.deviceLogin.domain.DeviceLogin">
+		DELETE FROM device_login
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

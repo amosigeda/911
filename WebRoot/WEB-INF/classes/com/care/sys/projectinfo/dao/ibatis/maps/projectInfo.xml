@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="projectInfo">
+
+	<select id="getProjectInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM projectinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getRoleProjectFuncInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM roleprojectfuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="idP">
+			  idP=#idP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleCodeP">
+			  roleCodeP=#roleCodeP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="mName">
+			  mName=#mName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="projectCode">
+			  projectCode=#projectCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getProjectName" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM projectinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getProjectStatus" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM protectinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getProjectLocationSwitchInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM data_switch_infomation
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getProjectRoleInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM roleprojectfuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="roleCodeP">
+			  roleCodeP=#roleCodeP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="mName">
+			  mName=#mName#
+			</isNotEmpty>
+            <isNotEmpty prepend="and" property="projectCode">
+			  projectCode=#projectCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getProjectInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM projectinfo p LEFT JOIN 
+		(SELECT COUNT(id) count_user,belong_project FROM appuserinfo GROUP BY belong_project) 
+		a ON p.id=a.belong_project LEFT JOIN 
+		(SELECT COUNT(id) count_device,belong_project FROM device_active_info GROUP BY belong_project) 
+		b ON p.id=b.belong_project LEFT JOIN companyinfo c ON p.company_id=c.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getProjectInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT COUNT(*) FROM projectinfo p LEFT JOIN companyinfo c ON p.company_id=c.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getProjectLocationInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT COUNT(*) FROM data_switch_infomation
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getProjectInfoMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT MAX(id) FROM projectinfo
+	</select>
+	
+	<select id="getProjectInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT COUNT(id) FROM projectinfo
+	</select>	
+	<insert id="insertProjectInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		INSERT INTO projectinfo (id,project_no,project_name,channel_id,company_id,add_time,remark,status) VALUES 
+		(#id#,#projectNo#,#projectName#,#channelId#,#companyId#,#addTime#,#remark#,#status#)
+	</insert>
+	
+	<insert id="insertRelevanceInfo2" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		INSERT INTO relevanceinfo(company_id,channel_id) VALUES (#companyId#,#channelId#)
+	</insert>
+	
+	<update id="updatePorjectInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		UPDATE projectinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="projectName">
+				project_name=#projectName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+				,remark=#remark#
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<update id="updatePorjectSwitchInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		UPDATE data_switch_infomation
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="projectName">
+				project_name=#projectName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="locationSwitch">
+				location_switch=#locationSwitch#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="beifen">
+				beifen=#beifen#
+			</isNotEmpty>
+				
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<insert id="insertProjectRoleFuncInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		INSERT INTO roleprojectfuncinfo(roleCodeP,mName,projectCode) VALUES (#roleCodeP#,#mName#,#projectCode#)
+	</insert>
+	
+	<delete id="deleteProjectRoleFunInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		DELETE FROM roleprojectfuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="mName">
+			  mName=#mName#
+			</isNotEmpty>
+		<isNotEmpty prepend="and" property="roleCodeP">
+			 roleCodeP=#roleCodeP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

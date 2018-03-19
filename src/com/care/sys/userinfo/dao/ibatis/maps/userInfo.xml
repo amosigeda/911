@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserInfo">
+
+	<select id="getUserInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_UserInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getUsersInfoClient" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.userinfo.form.UserInfoForm">
+		SELECT * FROM userinfo  where  groupCode='3'
+	</select>
+
+	<select id="getUserInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+		SELECT * FROM userinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="userCode">
+			  userCode=#userCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName">
+			  userName=#userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="phoneNo">
+			phoneNo=#phoneNo#
+			</isNotEmpty>			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getUserInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+SELECT 
+  u.userName,
+  u.userCode,
+  u.remark,
+  u.passWrd1,
+  u.createDate,
+  u.updateDate,
+  u.groupCode,
+  u.tag,
+  u.id,
+  u.code,
+  u.phoneNo,
+  r.roleName 
+FROM
+  userinfo u 
+  LEFT JOIN roleinfo r 
+    ON u.groupCode = r.id 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy"> 
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		     limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getUserInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+		select count(1) from userinfo u left join roleinfo r on u.groupCode = r.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="passWrd">
+		      passWrd=#passWrd#
+			</isNotEmpty>
+			  <isNotEmpty prepend="and" property="tag">
+		      tag=#tag#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="userCode">
+		      userCode=#userCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName">
+		      userName=#userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="groupCode">
+		      groupCode=#groupCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getUserInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM userinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertUserInfo" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+		INSERT INTO userinfo
+		(userName,remark,userCode,passWrd,passWrd1,createDate,updateDate,groupCode,tag,code,addUser,company_id,project_id) 
+		VALUES 
+		(#userName#,#remark#,#userCode#,#passWrd#,#passWrd1#,#createDate#,#updateDate#,#groupCode#,#tag#,#code#,#addUser#,#companyId#,#projectId#)
+	</insert>
+
+	<update id="updateUserInfo" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+		UPDATE userinfo 
+		<dynamic prepend="SET">
+		<isNotEmpty prepend="," property="userCode">
+		      userCode=#userCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="userName">
+		      userName=#userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tag">
+		      tag=#tag#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="passWrd">
+		      passWrd=#passWrd#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="passWrd1">
+		      passWrd1=#passWrd1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="remark">
+		      remark=#remark#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="groupCode">
+		      groupCode=#groupCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="code">
+		      code=#code#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateDate">
+		      updateDate=#updateDate#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="applyStatus">
+		      apply_status=#applyStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="isInApply">
+		      isInApply=#isInApply#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="companyId">
+		      company_id=#companyId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="projectId">
+		      project_id=#projectId#
+			</isNotEmpty>
+		</dynamic>  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteUserInfo" parameterClass="com.care.sys.userinfo.domain.UserInfo">
+		DELETE FROM userinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

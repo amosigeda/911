@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="publicForm" type="com.godoing.rose.http.PublicFormBean" />
+    <form-bean name="userInfoForm" type="com.care.sys.userinfo.form.UserInfoForm" />
+	<form-bean name="funcInfoForm" type="com.care.sys.funcinfo.form.FuncInfoForm" />
+	<form-bean name="roleInfoForm" type="com.care.sys.roleinfo.form.RoleInfoForm" />
+	<form-bean name="sysLogInfoForm" type="com.care.sys.sysloginfo.form.SysLogInfoForm" />
+    <form-bean name="MonitorForm" type="com.care.sys.monitorinfo.form.MonitorInfoForm" />
+    
+  </form-beans>
+  
+    <global-forwards>
+    <forward contextRelative="true" name="error" path="/include/errormsg.jsp" />
+	<forward contextRelative="true" name="result" path="/public/Result.jsp" />
+  </global-forwards>
+
+  <action-mappings>
+    <action name="publicForm" path="/login" scope="request" type="com.care.common.http.LoginAction" validate="true">
+  	</action>
+  <action name="userInfoForm" path="/sysAdmin/userInfo/doUserInfo" scope="request" type="com.care.sys.userinfo.action.UserInfoAction" parameter="method">
+		<forward name="queryUserInfo" path="/sysAdmin/userInfo/userMain.jsp" />
+		<forward name="insertUserInfo" path="/sysAdmin/userInfo/userAdd.jsp" />
+		<forward name="updateUserInfo" path="/sysAdmin/userInfo/userUpdate.jsp" />
+		<forward name="updateUserPwdInfo" path="/sysAdmin/userInfo/userUpdatePwd.jsp" />
+		<forward name="channelPower" path="/sysAdmin/userInfo/channelPower.jsp" />
+		<forward name="adverPower" path="/sysAdmin/userInfo/adverPower.jsp" />
+		<forward name="internalApply" path="/sysAdmin/userInfo/internalApply.jsp"></forward>
+  </action>
+  <action name="funcInfoForm" path="/sysAdmin/funcInfo/doFuncInfo" scope="request" type="com.care.sys.funcinfo.action.DoFuncInfoAction" parameter="method">
+		<forward name="queryFuncInfo" path="/sysAdmin/funcInfo/funcInfoMain.jsp" />
+		<forward name="insertFuncInfo" path="/sysAdmin/funcInfo/funcInfoAdd.jsp" />
+		<forward name="updateFuncInfo" path="/sysAdmin/funcInfo/funcInfoUpdate.jsp" />
+    </action>
+	<action name="roleInfoForm" path="/sysAdmin/roleInfo/doRoleInfo" scope="request" type="com.care.sys.roleinfo.action.DoRoleInfoAction" parameter="method">
+		<forward name="queryRoleInfo" path="/sysAdmin/roleInfo/roleInfoMain.jsp" />
+		<forward name="roleFuncInfo" path="/sysAdmin/roleInfo/roleFuncPop.jsp" />
+		<forward name="insertRoleInfo" path="/sysAdmin/roleInfo/roleInfoAdd.jsp" />
+		<forward name="updateRoleInfo" path="/sysAdmin/roleInfo/roleInfoUpdate.jsp" />
+    </action>
+
+	<action name="sysLogInfoForm" path="/sysAdmin/sysLogInfo/doSysLogInfo" scope="request" type="com.care.sys.sysloginfo.action.DoSysLogInfoAction" parameter="method">
+		<forward name="querySysLogInfo" path="/sysAdmin/sysLogInfo/sysLogInfoMain.jsp" />
+		<forward name="queryBeifenRecord" path="/sysAdmin/sysLogInfo/sysLogDelInfoMain.jsp"></forward>
+        <forward name="querySysRecord" path="/sysAdmin/sysLogInfo/sysRecordInfoMain.jsp" />
+        <forward name="updateOutTime" path="/index.jsp" />
+    </action>
+    <action name="MonitorForm" path="/sysAdmin/monitorInfo/doMonitorInfo" scope="request" type="com.care.sys.monitorinfo.action.DoMonitorInfoAction" parameter="method">
+        <forward name="queryMonitorInfo" path="/sysAdmin/monitorInfo/monitorInfoMain.jsp"></forward>
+    	<forward name="queryAppVisit" path="/sysAdmin/monitorInfo/appVisitMain.jsp"></forward>
+    	<forward name="queryDeviceVisit" path="/sysAdmin/monitorInfo/deviceVisitMain.jsp"></forward>
+    </action>
+    
+  	<action path="/doLogin" type="com.care.sys.appinterfaces.LoginAction"></action>
+    <action path="/doRegister" type="com.care.sys.appinterfaces.RegisterAction"></action>
+    <action path="/doModifyUser" type="com.care.sys.appinterfaces.updateUserAction"></action> 
+    <action path="/doAddDevice" type="com.care.sys.appinterfaces.BondBaoBeiAction"></action>    
+    <action path="/doAlphaAddDevice" type="com.care.sys.appinterfaces.AlphaBondBaoBeiAction"></action>    
+    <action path="/doAddSaleDeviceInfo" type="com.care.sys.appinterfaces.AddSaleDeviceAction"></action>    
+    <action path="/doCheckDeviceStatus" type="com.care.sys.appinterfaces.CheckDeviceStatusAction"></action>    
+    <action path="/doVerifyDevice" type="com.care.sys.appinterfaces.VerifyDeviceAction"></action>
+    <action path="/doListen" type="com.care.sys.appinterfaces.ListenAction"></action>
+    <action path="/doLocation" type="com.care.sys.appinterfaces.LocationAction"></action>
+    <action path="/doQueryDeviceTrack" type="com.care.sys.appinterfaces.QueryDeviceTrackAction"></action>
+    <action path="/doFindBaby" type="com.care.sys.appinterfaces.FindBabyAction"></action>
+    <action path="/doModifyDeviceSafeArea" type="com.care.sys.appinterfaces.ModifyDeviceSafeAreaAction"></action>
+    <action path="/doDeleteDeviceSafeArea" type="com.care.sys.appinterfaces.DeleteDeviceSafeAreaAction"></action>
+    <action path="/doAddDeviceFamily" type="com.care.sys.appinterfaces.AddDeviceFamilyAction"></action>
+    <action path="/doDeleteDeviceFamily" type="com.care.sys.appinterfaces.DeleteDeviceFamilyAction"></action>
+    <action path="/doModifyDeviceFamily" type="com.care.sys.appinterfaces.ModifyDeviceFamilyAction"></action>
+    <action path="/doDeleteDevice" type="com.care.sys.appinterfaces.DeleteDeviceAction"></action>
+    <action path="/doDownLoadDeviceData" type="com.care.sys.appinterfaces.DownloadDeviceDataAction"></action>
+    <action path="/doFeedback" type="com.care.sys.appinterfaces.FeedBackAction"></action>
+    <action path="/doUpdateApp" type="com.care.sys.appinterfaces.DoAppUpdateAction"></action>
+    <action path="/doUpdateAppWei" type="com.care.sys.appinterfaces.updateAppNewAction"></action>
+    <action path="/doGetDeviceSafeArea" type="com.care.sys.appinterfaces.DoGetDeviceSafeAreaAction"></action>
+    <action path="/doShareDevice" type="com.care.sys.appinterfaces.ShareDeviceAction"></action>
+    <action path="/doMsgHandler" type="com.care.sys.appinterfaces.MsgHandlerAction"></action>
+    <action path="/doGetMsg" type="com.care.sys.appinterfaces.doGetMsgAction"></action>
+    <action path="/doFindPassword" type="com.care.sys.appinterfaces.doFindPasswordAction"></action>
+    <action path="/doGetFall" type="com.care.sys.appinterfaces.doGetFallAction"></action>
+    <action path="/REMOTE" type="com.care.sys.appinterfaces.doRemoteAction"></action>
+    <action path="/SET_DISTURB" type="com.care.sys.appinterfaces.doDisturbAction"></action>
+    <action path="/GET_LOWELECTRICITY" type="com.care.sys.appinterfaces.doGetLowAction"></action>    
+    <action path="/SET_CLOCK" type="com.care.sys.appinterfaces.doClockAction"></action>
+    <action path="/SET_SLEEP" type="com.care.sys.appinterfaces.doSleepAction"></action>
+    <action path="/GET_CLOCK" type="com.care.sys.appinterfaces.getClockAction"></action>
+    <action path="/GET_SLEEP" type="com.care.sys.appinterfaces.getSleepAction"></action>
+    <action path="/GET_DISTURB" type="com.care.sys.appinterfaces.getDisturbAction"></action>
+    <action path="/GET_PHONE" type="com.care.sys.appinterfaces.getPhoneAction"></action>
+    <action path="/QUERYTRACECOUNT" type="com.care.sys.appinterfaces.getTraceCountAction"></action>
+    <action path="/QUERYTRACEDAYCOUNT" type="com.care.sys.appinterfaces.getTraceDayCountAction"></action>
+   	<action path="/doDeleteShareDevice" type="com.care.sys.appinterfaces.DoDeleteShareDeviceAction"></action>
+   	<action path="/QUERYPIC" type="com.care.sys.appinterfaces.QueryPicAction"></action>
+   	<action path="/LocRadiusPoiResponse" type="com.care.sys.appinterfaces.LocRadiusPoiResponse"></action>
+   	<action path="/uploadGps" type="com.care.sys.appinterfaces.UploadGpsAction"></action>
+   	<action path="/warningList" type="com.care.sys.interfaces.warningListAction"></action>
+   	<action path="/shock" type="com.care.sys.interfaces.shockAction"></action>
+   	<action path="/lowVoltage" type="com.care.sys.interfaces.lowVoltageAction"></action>
+   	<action path="/projectValidate" type="com.care.sys.interfaces.projectValidateAction"></action>
+   	<action path="/locationSwtich" type="com.care.sys.interfaces.locationSwitchAction"></action>
+   	 <action path="/uploadSport" type="com.care.sys.appinterfaces.uploadSportAction"></action>
+   	 <action path="/uploadCallLog" type="com.care.sys.appinterfaces.uploadCallLogAction"></action>
+   	 <action path="/updateFriends" type="com.care.sys.appinterfaces.UpdateFriendsAction"></action>
+   	 <action path="/getSportInfo" type="com.care.sys.appinterfaces.getSportInfoAction"></action>
+   	 <action path="/getCallInfo" type="com.care.sys.appinterfaces.getCallInfoAction"></action>
+   	 <action path="/getSportTodayInfo" type="com.care.sys.appinterfaces.getSportRankInfoAction"></action>
+   	 <action path="/getBalcance" type="com.care.sys.appinterfaces.getBalanceInfoAction"></action>
+   	 <action path="/uploadweather" type="com.care.sys.appinterfaces.uploadWeatherAction"></action>
+   	 <action path="/setClock" type="com.care.sys.appinterfaces.setClockAction"></action>
+   	 <action path="/disturInfo" type="com.care.sys.appinterfaces.disturbInfoAction" ></action>
+   	 <action path="/setSportInfo" type="com.care.sys.appinterfaces.setSportInfoAction"></action>
+   	 <action path="/getDeviceInfo" type="com.care.sys.appinterfaces.getDeviceInfoAction"></action>
+	  <action path="/getlalInfo" type="com.care.sys.appinterfaces.getlalAction"></action>
+	  <action path="/sitAimStep" type="com.care.sys.appinterfaces.getSetAimStepAction"></action>
+   	
+    <!-- 设备通讯接口 -->
+    <action path="/DEVICE_UP_DEVICEINFO" type="com.care.sys.interfaces.upPhoneInfoAction"></action>
+    <action path="/DEVICE_UP_MEDIA" type="com.care.sys.interfaces.upMediaAction"></action>
+    <action path="/DEVICE_MSG_SETTING" type="com.care.sys.interfaces.getSettingAction"></action>    
+    <action path="/DEVICE_UP_LOCATION" type="com.care.sys.interfaces.upLocationAction"></action>
+    <action path="/DEVICE_UPDATE_MEDIA" type="com.care.sys.interfaces.updateMediaAction"></action>
+    <action path="/DEVICE_SEND_MEDIA" type="com.care.sys.interfaces.sendMediaAction"></action>
+    <action path="/UP_DEVICE_FAMILY_PHONE" type="com.care.sys.interfaces.upDeviceFamilyPhoneAction"></action>
+    <action path="/MSG_DEVICE_FAMILY_PHONE" type="com.care.sys.interfaces.msgDeviceFamilyPhoneAction"></action>
+	<action path="/GET_DEVICE_LISTEN" type="com.care.sys.interfaces.getDeviceListenAction"></action>
+	<action path="/DEVICE_VIEW_POSITION" type="com.care.sys.interfaces.viewLocationAction"></action>
+	<action path="/UP_DEVICE_FAMILY_PHONE_TYPE" type="com.care.sys.interfaces.upDeviceFamilyPhoneTypeAction"></action>
+	<action path="/GET_DEVICE_ALARM_BELL_TYPE" type="com.care.sys.interfaces.getDeviceAlarmBellAction"></action>
+	<action path="/GET_DEVICE_LOCATION_LBS" type="com.care.sys.interfaces.GetDeviceLocationForLBS"></action>
+	<action path="/HEARTBEAT" type="com.care.sys.interfaces.heartbeatAction"></action>
+    <action path="/SYNC_TIME" type="com.care.sys.interfaces.syncDeviceTimeAction"></action>
+	<action path="/DEVICE_ONLINE" type="com.care.sys.interfaces.DeviceLoginAction"></action>
+	<action path="/DEVICE_FALL" type="com.care.sys.interfaces.DeviceFallAction"></action>
+	<action path="/DEVICE_DISTURB" type="com.care.sys.interfaces.DeviceDisturbAction"></action>
+	<action path="/DEVICE_LOWELECTRICITY" type="com.care.sys.interfaces.DeviceLowAction"></action>
+	<action path="/DEVICE_CLOCK" type="com.care.sys.interfaces.DeviceClockAction"></action>
+	<action path="/DEVICE_SLEEP" type="com.care.sys.interfaces.DeviceSleepAction"></action>
+	<action path="/DEVICE_POWEROFF" type="com.care.sys.interfaces.DevicePowerOff"></action>
+	  <!--911-APP通讯接口 -->
+      <action path="/getLocation" type="com.care.sys.nineoneoneinterfaces.GetLocationAction"></action>
+      
+</action-mappings>
+    <message-resources parameter="ApplicationResources" />
+</struts-config>

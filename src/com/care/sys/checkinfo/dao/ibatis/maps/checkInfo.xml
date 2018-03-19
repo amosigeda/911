@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CheckInfo">
+	<select id="getCheckInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		SELECT * FROM checkinfo 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getCheckInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		SELECT c.*,p.project_name,cc.ID_code FROM checkinfo c LEFT JOIN projectinfo p ON c.belong_project=p.id LEFT JOIN check_code_info cc ON c.ID_code_id=cc.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="limit">
+		   <isNotEmpty prepend=" " property="from">
+		      $from$
+		   </isNotEmpty>
+		   ,
+		   <isNotEmpty prepend=" " property="pageSize">
+		      $pageSize$
+		   </isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getCheckInfoCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		SELECT COUNT(c.id) FROM checkinfo c LEFT JOIN projectinfo p ON c.belong_project=p.id LEFT JOIN check_code_info cc ON c.ID_code_id=cc.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getCheckInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		SELECT COUNT(*) FROM checkinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertCheckInfo" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		INSERT INTO checkinfo(package_name,version_name,version_code,download_path,function_cap,belong_project,up_user,ID_code_id,up_type,up_platform,status,remarks,version_type,upload_time,er_weima) 
+		VALUES 
+		(#packageName#,#versionName#,#versionCode#,#downloadPath#,#functionCap#,#belongProject#,#upUser#,#IDCodeId#,#upType#,#upPlatform#,#status#,#remarks#,#versionType#,#uploadTime#,#erWeiMa#)
+	</insert>
+	
+	<update id="updateCheckInfo" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		UPDATE checkinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="packageName">
+				package_name = #packageName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="versionName">
+				version_name = #versionName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="versionCode">
+				version_code = #versionCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="downloadPath">
+				download_path = #downloadPath#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="functionCap">
+				function_cap = #functionCap#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="belongProject">
+				belong_project = #belongProject#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="upUser">
+				up_user = #upUser#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="IDCodeId">
+				ID_code_id = #IDCodeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="upType">
+				up_type = #upType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="upPlatform">
+				up_platform = #upPlatform#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status = #status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="remarks">
+				remarks = #remarks#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="versionType">
+				version_type = #versionType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erWeiMa">
+				er_weima = #erWeiMa#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<insert id="insertCheckCodeInfo" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		INSERT INTO check_code_info(ID_code) VALUES (#IDCode#)
+	</insert>
+	
+	<select id="getCheckCodeInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		SELECT * FROM check_code_info 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<delete id="deleteCheckInfo" parameterClass="com.care.sys.checkinfo.domain.CheckInfo">
+		DELETE from checkinfo
+		<dynamic prepend="where">
+			<isNotEmpty property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+</sqlMap>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="companyInfo">
+
+	<select id="getCompanyInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT * FROM companyinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getCompanyInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT * FROM companyinfo c LEFT JOIN (SELECT company_id,COUNT(id) count_id FROM projectinfo GROUP BY company_id) p ON c.id=p.company_id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend="" property="from">
+				$from$
+			</isNotEmpty>
+			,
+			<isNotEmpty prepend="" property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getCompanyInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT COUNT(*) FROM companyinfo c
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getCompanyInfoMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT MAX(id) FROM companyinfo
+	</select>
+	
+	<select id="getCompanyInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT count(id) FROM companyinfo
+	</select>	
+	
+	<insert id="insertCompanyInfo" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		INSERT INTO companyinfo
+		(id,company_no,company_name,add_time,update_time,remark,status,user_name)
+		 VALUES 
+		(#id#,#companyNo#,#companyName#,#addTime#,#updateTime#,#remark#,#status#,#userName#)
+	</insert>
+	
+	<insert id="insertRelevanceInfo" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		INSERT INTO relevanceinfo(company_id,channel_id) VALUES (#companyId#,#channelId#)
+	</insert>
+	
+	<select id="getRelevanceInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		SELECT * FROM relevanceinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<update id="updateCompanyInfo" parameterClass="com.care.sys.companyinfo.domain.CompanyInfo">
+		UPDATE companyinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="companyName">
+				company_name=#companyName#
+			</isNotEmpty>			
+				,remark=#remark#			
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime">
+				update_time=#updateTime#
+			</isNotEmpty>
+			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+</sqlMap>

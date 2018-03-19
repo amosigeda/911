@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+       <result>
+           <success>
+			   <deletes>删除成功</deletes>
+			   <inserts>新增成功</inserts>
+			   <updates>更新成功</updates>
+			   <save>保存成功</save>
+			   <salerDel>商务还没有建立,请建立</salerDel>
+			   <updateIcon>更新图片成功</updateIcon>
+           </success>
+           <fail>
+                <timeout>系统超时</timeout>
+				<loginCodeError>帐号错误!</loginCodeError>
+				<loginPwdError>密码错误!</loginPwdError>
+				<userCodeError>系统中存在重复的帐号</userCodeError>
+				<userNameError>存在重复的用户名</userNameError>
+				<productError>存在重复的项目</productError>
+				<tagError>该项目已同步不能删除</tagError>
+				<customAddError>该商务存在客户，无法删除</customAddError>
+				<customError>该客户已有项目,请先删除项目</customError>
+				<CodeCountError>已超过最大数目</CodeCountError>
+				<silerCodeError>存在相同的销售渠道</silerCodeError>
+				<noIconPath>图片资源不存在</noIconPath>
+				<noAPKPath>APK不存在</noAPKPath>
+           </fail>
+			<upload>
+				
+			</upload>
+			<database>
+                 <connectDBError>无法与数据库建立连接.</connectDBError>
+                 <namningError>系统命名目录服务出错.</namningError>
+				 <SQLException>数据库内部异常.</SQLException>
+           </database>
+           <!--系统运行异常提示信息-->
+           <sysRunException>
+               <doActionException>系统处理事件异常，请确认操作是否合法.</doActionException>
+               <containerException>系统容器运行异常，请重新启动系统.</containerException>
+               <noKnownException>未知的系统异常，请与管理员联系.</noKnownException>
+           </sysRunException>
+		   
+    </result>
+</Config>

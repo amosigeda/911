@@ -1,0 +1,82 @@
+.table1 {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: DCDCDC;
+	border-left-color: DCDCDC;
+}
+A { FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:link { COLOR: #4F4F4F }
+A:visited { COLOR: #4F4F4F }
+A:active { COLOR: #4F4F4F }
+A:hover { COLOR: #790000; TEXT-DECORATION: none }
+BODY { FONT-SIZE: 9pt; FONT-WEIGHT: normal; LINE-HEIGHT: 15px}
+P { FONT-SIZE: 9pt; LINE-HEIGHT: 15px }
+BR { FONT-SIZE: 9pt; LINE-HEIGHT: 15px }
+DIV { FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: normal; LINE-HEIGHT: 15px }
+IMG { left-margin: 0px; right-margin: 0px }
+TD {font-family:宋体,MS SONG,SimSun,tahoma,sans-serif; font-size:12px　}
+TT TD { COLOR:red }
+TR TD { COLOR:black }
+TABLE { FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: normal }
+INPUT { FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: normal }
+OPTION { FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: normal }
+INPUT  {
+	PADDING-RIGHT: 1px;
+	PADDING-LEFT: 1px;
+	font-family:宋体,MS SONG,SimSun,tahoma,sans-serif;
+	FONT-SIZE: 12px;
+	PADDING-BOTTOM: 1px;
+	PADDING-TOP: 1px;
+	HEIGHT: 18px;
+	border: 1px solid #000033;
+}
+TEXTAREA
+{
+	PADDING-RIGHT: 1px;
+	PADDING-LEFT: 1px;
+	font-family:宋体,MS SONG,SimSun,tahoma,sans-serif;
+	FONT-SIZE: 12px;
+	PADDING-BOTTOM: 1px;
+	PADDING-TOP: 1px;
+	border: 1px solid #000033;
+}
+SELECT
+{
+	PADDING-RIGHT: 1px;
+	PADDING-LEFT: 1px;
+	font-family:宋体,MS SONG,SimSun,tahoma,sans-serif;
+	FONT-SIZE: 12px;
+	PADDING-BOTTOM: 1px;
+	PADDING-TOP: 1px;
+	border: 1px solid #000033;
+}
+.title { COLOR: #ee9c00; FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: bold }
+.subtitle { COLOR: blue; FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: bold }
+.warn { COLOR: red; FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: bold }
+.help { COLOR: #8f7fff; FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-WEIGHT: normal }
+.tabletitle{border-bottom-style:groove;border-bottom-color:#99bbcc;border-bottom-width:0px}
+.none  {
+	border: 0px none;
+	padding: 0px;
+	height: auto;
+
+}
+.td5 {
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-color: #E5F5FA;
+	text-align: center;
+}
+.td6 {
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-color: #F7FCFD;
+	text-align: center;
+}
+

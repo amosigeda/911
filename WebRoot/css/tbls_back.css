@@ -1,0 +1,141 @@
+.result_cess {
+	font-size: 12px;
+	color: #BDBEC8;
+	border: 1px solid #C4DDD9;
+	background-color: #EDF7F8;
+}
+.result_cess_tr {
+	background-color: #C4DDD9;
+	line-height: 20px;
+	color: #4f6b72;
+	text-indent: 6pt;
+	text-align: center;
+}
+.result_cess_font {
+	font-size: 14px;
+	color: #BBD7F4;
+}
+.result_cess_btn {
+	border: 1px solid #C4DDD9;
+	font-size: 12px;
+	color: #C4DDD9;
+	background-color: #EDF7F8;
+	letter-spacing: 1pt;
+}
+.result_err {
+	font-size: 12px;
+	color: #BDBEC8;
+	border: 1px solid #E4B050;
+	background-color: #FCEBE2;
+}
+.result_err_tr {
+	background-color: #F2CBAA;
+	line-height: 20px;
+	color: #4f6b72;
+	text-indent: 6pt;
+	text-align: center;
+}
+.result_err_font {
+	font-size: 14px;
+	color: #FF6A6A;
+}
+.result_err_btn {
+	border: 1px solid #F2CBAA;
+	font-size: 12px;
+	color: #FF9966;
+	background-color: #FCEBE2;
+	letter-spacing: 1pt;
+}
+.tbl_1 {
+	font-size: 12px;
+	color: #BDBEC8;
+	border: 1px solid #FFFFFF;
+	background-color: #C4DDD9;
+}
+.tr_0 {
+	background-color: #c3daf9;
+	border: 1px solid #6D4BF5;
+	line-height: 26px;
+	color: #4f6b72;
+	letter-spacing: normal;
+	text-align: center;
+	height: 25px;
+}
+.tr_1 {
+	background-color: #fff;
+	line-height: 20px;
+	color: #4f6b72;
+	text-indent: 6pt;
+	text-align: center;
+}
+.tr_2 {
+	background-color: #f5fafa;
+	line-height: 20px;
+	color: #4f6b72;
+	text-indent: 6pt;
+	text-align: center;
+}
+.txt_1 {
+	border: 1px solid #A0B8BE;
+	line-height: 16px;
+	background-color: #FAFCFC;
+	color: #4f6b72;
+
+}
+.but_1 {
+	background-color: #c3daf9;
+	border: 1px solid #A0B8BE;
+	text-align: center;
+	font-size: 12px;
+	color: #4f6b72;
+	vertical-align: bottom;
+}
+.left_tbl_1 {
+	font-size: 12px;
+	color: #BDBEC8;
+	border: 1px solid #FFFFFF;
+	background-color: #8BBFFA;
+}
+.left_tr_1 {
+	background-color: #c3daf9;
+	line-height: 20px;
+	color: #4f6b72;
+	font-size: 12px;
+}
+
+
+.right_tbl_1 {
+	font-size: 12px;
+	color: #BDBEC8;
+	border: 1px solid #FFFFFF;
+	background-color: #8BBFFA;
+}
+.right_tr_1 {
+	background-color: #c3daf9;
+	line-height: 20px;
+	color: #828282;
+	font-size: 12px;
+}
+A {
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	TEXT-DECORATION: none;
+}
+A:link { COLOR: #080808}
+A:visited { COLOR: #080808}
+A:active { COLOR: #080808 }
+A:hover { COLOR: #CD0000; TEXT-DECORATION: none }
+.radio_1 {
+	border: 1px solid #92ADB4;
+}
+.title_1 {
+	font-size: 14px;
+	font-weight: bolder;
+	color: #4f6b72;
+	line-height: 36px;
+	font-family: "??";
+	autocomplete:off
+}
+.checkbox_1 {
+	border: 1px solid #F4AF71;
+}

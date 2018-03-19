@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MsgInfo">
+
+	<select id="getMsgInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_MsgInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getMsgInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		SELECT * FROM msg_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="limit">
+		   <isNotEmpty prepend=" " property="from">
+		      $from$
+		   </isNotEmpty>
+		   ,
+		   <isNotEmpty prepend=" " property="pageSize">
+		      $pageSize$
+		   </isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getMsgInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		SELECT m.*,
+		SUBSTRING(m.msg_content,LOCATE('@',m.msg_content)+1,(LENGTH(m.msg_content)-LOCATE('@',REVERSE(m.msg_content)))-LOCATE('@',m.msg_content)) AS msgImei,
+		SUBSTRING(m.msg_content,1,(LOCATE('@',m.msg_content)-1)) AS msgContent,
+		a1.user_name from_user_name,a2.user_name to_user_name,a1.id user_id,p.project_name project FROM msg_info m LEFT JOIN appuserinfo a1 ON m.from_id=a1.id LEFT JOIN appuserinfo a2 ON m.to_id=a2.id LEFT JOIN projectinfo p ON p.id=m.belong_project
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy"> 
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		     limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getMsgInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		SELECT COUNT(m.id) FROM msg_info m LEFT JOIN appuserinfo a1 ON m.from_id=a1.id LEFT JOIN appuserinfo a2 ON m.to_id=a2.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getMsgInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM msg_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		INSERT INTO msg_info(from_id,to_id,is_handler,msg_level,msg_content,msg_handler_date,belong_project,msg_occur_date) VALUES (#fromId#,#toId#,#isHandler#,#msgLevel#,#msgContent#,#msgHandlerDate#,#belongProject#,#msgOccurDate#)
+	</insert>
+
+	<update id="updateMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		UPDATE msg_info 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="isHandler">
+		      is_handler=#isHandler#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="msgHandlerDate">
+		      msg_handler_date=#msgHandlerDate#
+			</isNotEmpty>
+		</dynamic>  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		DELETE FROM msg_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

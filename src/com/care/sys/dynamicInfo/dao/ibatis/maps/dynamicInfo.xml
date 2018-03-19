@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DynamicInfo">
+	
+<select id="getDynamicInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		SELECT * FROM dynamic_menu
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+		
+	</select>
+	
+	<select id="getDynamicInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		SELECT COUNT(*) FROM dynamic_menu
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertDynamicInfo"  parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		INSERT INTO dynamic_menu
+		(nc_name,mName,superId,menuLeave,menuRank,submenuNumber,effect,add_time,m_describe)
+		 VALUES 
+		(#name#,#mName#,#superId#,#menuLeave#,#menuRank#,#submenuNumber#,#effect#,#addTime#,#describe#)
+	</insert> 
+	
+	<select id="getDynamicInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		SELECT * FROM dynamic_menu
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<update id="updateDynamicInfo" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		UPDATE dynamic_menu
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="name">
+				nc_name=#name#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="mName">
+				mName=#mName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="superId">
+				superId=#superId#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="menuLeave">
+				menuLeave=#menuLeave#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="menuRank">
+				menuRank=#menuRank#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="effect">
+				effect=#effect#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="submenuNumber">
+				submenuNumber=#submenuNumber#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="describe">
+				m_describe=#describe#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<delete id="deleteDynamicInfo" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		DELETE FROM dynamic_menu
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+		<select id="getDynamicFuncInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.dynamicInfo.domain.DynamicInfo">
+		SELECT * FROM  dynamic_menu
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+</sqlMap>

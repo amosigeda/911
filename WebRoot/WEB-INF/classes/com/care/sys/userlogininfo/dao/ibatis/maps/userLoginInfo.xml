@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userLoginInfo">
+	<select id="getUserLoginInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.userlogininfo.domain.UserLoginInfo">
+		SELECT * FROM userlogininfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertUserLoginInfo" parameterClass="com.care.sys.userlogininfo.domain.UserLoginInfo">
+		INSERT INTO userlogininfo(user_id,login_time,imei,imsi,phone_model,phone_version,app_version,ip,province,belong_project) VALUES (#userId#,#loginTime#,#imei#,#imsi#,#phoneModel#,#phoneVersion#,#appVersion#,#ip#,#province#,#belongProject#)
+	</insert>
+	
+	<select id="getUserLoginInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.userlogininfo.domain.UserLoginInfo">
+		SELECT u.*,p.project_name,a.user_name FROM userlogininfo u LEFT JOIN projectinfo p ON u.belong_project=p.id LEFT JOIN appuserinfo a ON u.user_id=a.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getUserLoginInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.userlogininfo.domain.UserLoginInfo" >
+		SELECT COUNT(*) FROM userlogininfo u LEFT JOIN projectinfo p ON u.belong_project=p.id LEFT JOIN appuserinfo a ON u.user_id=a.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+</sqlMap>

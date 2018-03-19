@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FuncInfo">
+
+	<select id="getFuncInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_funcInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getFuncInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		SELECT funcName,funcDesc,funcSort,levels,statu,funcDo,funcCode,superCode FROM funcinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFuncInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		SELECT Top
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+		funcName,funcDesc,funcSort,levels,statu,funcDo,funcCode,superCode FROM funcinfo Where (
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+			NOT IN (SELECT TOP
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+		FROM funcinfo
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			<isNotEmpty prepend="and" property="funcCode">
+			  funcCode=#funcCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="funcName">
+			  funcName=#funcName#
+			</isNotEmpty>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFuncInfoListByMap" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.godoing.rose.lang.DataMap">
+		SELECT Top
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+		funcName,funcDesc,funcSort,levels,statu,funcDo,funcCode,superCode FROM funcinfo Where (
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+			NOT IN (SELECT TOP
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+			<isNotEmpty prepend=" " property="orderSort">
+				$orderSort$
+			</isNotEmpty>
+		FROM funcInfo
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			)
+		)
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFuncInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		SELECT COUNT(*) FROM funcinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="funcCode">
+			  funcCode=#funcCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="funcName">
+			  funcName=#funcName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFuncInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM funcinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertFuncInfo" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		INSERT INTO funcinfo(funcName,funcDesc,funcSort,levels,statu,funcDo,funcCode) VALUES (#funcName#,#funcDesc#,#funcSort#,#levels#,#statu#,#funcDesc#,#funcCode#)
+	</insert>
+
+	<update id="updateFuncInfo" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		UPDATE funcinfo SET  funcName = #funcName# , funcDo = #funcDo# , funcSort = #funcSort# , levels = #levels# , statu = #statu# , funcDesc = #funcDesc# , funcCode = #funcCode# 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteFuncInfo" parameterClass="com.care.sys.funcinfo.domain.FuncInfo">
+		DELETE FROM funcinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

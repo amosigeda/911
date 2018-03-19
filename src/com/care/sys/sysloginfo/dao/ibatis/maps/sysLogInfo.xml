@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysLogInfo">
+
+	<select id="getSysLogInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_sysLogInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getSysLogInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		SELECT userName,logs,logDate,id,ip FROM sysloginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="userName">
+				userName=#userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getSysLogInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		SELECT userName,logs,logDate,id,ip,outDate FROM sysloginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+			$from$
+			</isNotEmpty>
+			,
+			<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getSysLogInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		SELECT COUNT(*) FROM sysloginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertSysLogInfo" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		INSERT INTO sysloginfo(userName,logs,logDate,ip) VALUES (#userName#,#logs#,#logDate#,#ip#)
+	</insert>
+
+	<insert id="deleteSysLogInfo" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		insert into synchro_data.sysloginfo_beifen (userName,logs,logDate,ip) 
+        select userName,logs,logDate,ip from synchro_data.sysloginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</insert>
+	<select id="getBeifenRecord" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		SELECT updateTime,ip,logTime FROM beifen_record
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<insert id="insertBeifenRecord"  parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		insert into beifen_record (updateTime,ip,logTime) values (#updateDate#,#ip#,#startTime#)
+	</insert>
+	
+	<select id="getBeifenRecordCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		select count(*) from beifen_record
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="selectSysLogInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		select Max(id) from sysloginfo
+	</select>
+	<delete id="deleteSysLogInfos" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+	    delete from sysloginfo
+	    <dynamic prepend="where">			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+<update id="updateOutDate" parameterClass="com.care.sys.sysloginfo.domain.SysLogInfo">
+		UPDATE sysloginfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="outDate">
+				outDate=#outDate#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+</sqlMap>

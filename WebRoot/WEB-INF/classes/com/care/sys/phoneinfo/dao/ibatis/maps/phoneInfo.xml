@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="phoneInfo">
+
+	<select id="getPhoneInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		SELECT * FROM phoneinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getPhoneInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		SELECT  p.serie_no,p.status,p.input_time,m.type,pro.project_name FROM phoneinfo p LEFT JOIN phone_manage m ON p.phone_manage_id=m.id LEFT JOIN projectinfo pro ON p.belong_project=pro.id 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getPhoneInfoCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo" >
+		SELECT COUNT(p.id) FROM phoneinfo p LEFT JOIN phone_manage m on p.phone_manage_id=m.id LEFT JOIN projectinfo pro ON p.belong_project=pro.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getPhoneInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo" >
+		SELECT COUNT(*) FROM phoneinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertPhoneInfo" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		INSERT INTO phoneinfo(serie_no,input_time,belong_project,phone_manage_id) VALUES (#serieNo#,#inputTime#,#belongProject#,#phoneManageId#)
+	</insert>
+	
+	<update id="updatePhoneInfo" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		UPDATE phoneinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="productModel">
+				product_model=#productModel#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="firmwareEdition">
+				firmware_edition=#firmwareEdition#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="phone">
+				phone=#phone#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="shortNumber">
+				short_number=#shortNumber#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="alarmBellType">
+				alarm_bell_type=#alarmBellType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="uploadTime">
+				upload_time=#uploadTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="relativeCallStatus">
+				relative_call_status=#relativeCallStatus#
+			</isNotEmpty>											
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="serieNo">
+				serie_no=#serieNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>		
+	</update>
+	
+	<insert id="insertPhoneManage" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		INSERT INTO phone_manage
+		(id,input_time,company_id,project_id,count_num,mini_num,max_num,type) 
+		VALUES 
+		(#id#,#inputTime#,#companyId#,#belongProject#,#countNum#,#miniNum#,#maxNum#,#status#)
+	</insert>
+	
+	<select id="getPhoneManageListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo">
+		SELECT m.*,p.project_name,c.company_name FROM phone_manage m LEFT JOIN projectinfo p ON m.project_id=p.id LEFT JOIN companyinfo c ON m.company_id=c.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getPhoneManageCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo" >
+		SELECT COUNT(m.id) FROM phone_manage m LEFT JOIN projectinfo p ON m.project_id=p.id LEFT JOIN companyinfo c ON m.company_id=c.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getPhoneManageMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.phoneinfo.domain.PhoneInfo" >
+		SELECT MAX(id) FROM phone_manage		
+	</select>
+
+</sqlMap>

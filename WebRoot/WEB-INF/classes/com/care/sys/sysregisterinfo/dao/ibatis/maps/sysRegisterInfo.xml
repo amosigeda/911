@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserInfo">
+	<select id="getRegisterInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		select * from userinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getRegisterInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		select * from userinfo left join roleinfo on userinfo.groupCode = roleInfo.id
+		<dynamic prepend="where">			
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize" >
+				$pageSize$
+			</isNotEmpty>	
+	</select>
+	
+	<select id="getRegisterInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		select count(1) from userInfo left join roleinfo on userInfo.groupCode = roleinfo.id
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="condition">
+					$condition$
+				</isNotEmpty>
+		</dynamic>	
+	</select>
+	
+	<select id="getRegisterInfoMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		select max(id) from userinfo
+	</select>
+	
+	<insert id="insertRegisterInfo" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		INSERT INTO userinfo(id,userCode,userName,passWrd,passWrd1,tag,createDate,updateDate,groupCode,remark,code,addUser,phoneNo,apply_status,company_id,isInApply,applyReason)
+		VALUES(#id#,#userCode#,#userName#,#passWrd#,#passWrd1#,#tag#,#createDate#,#updateDate#,#groupCode#,#remark#,#code#,#addUser#,#phoneNo#,#apply_status#,#companyId#,#isInApply#,#applyReason#)
+	</insert>
+	
+	<update id="updateRegisterInfo" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		update userinfo
+			<dynamic prepend="set">
+			<isNotEmpty prepend="," property="groupCode">
+				groupCode=#groupCode#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="updateDate">
+				updateDate=#updateDate#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="tag">
+				tag=#tag#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="apply_status">
+				apply_status=#apply_status#
+			</isNotEmpty>	
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<update id="updateGroupCode" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		update userinfo
+			<dynamic prepend="set">
+			<isNotEmpty prepend="," property="groupCode">
+				groupCode=#groupCode#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="updateDate">
+				updateDate=#updateDate#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="code">
+				code=#code#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<update id="updateTag" parameterClass="com.care.sys.sysregisterinfo.domain.UserInfo">
+		update userinfo
+		<dynamic prepend="set">
+				tag=#tag#,
+			<isNotEmpty prepend="," property="updateDate">
+				updateDate=#updateDate#
+			</isNotEmpty>	
+			
+			<isNotEmpty prepend="," property="apply_status">
+				apply_status=#apply_status#
+			</isNotEmpty>	
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+</sqlMap>
+

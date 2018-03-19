@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ShareInfo">
+
+	<select id="getShareInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_ShareInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+
+	<select id="getShareInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		SELECT * FROM share_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getShareInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		SELECT 
+  s.*,
+  a1.user_name from_user_name,
+  a2.user_name to_user_name ,
+  p.project_name
+FROM
+  share_info s 
+  LEFT JOIN appuserinfo a1 
+    ON s.user_id = a1.id 
+  LEFT JOIN appuserinfo a2 
+    ON s.to_user_id = a2.id 
+    LEFT JOIN 
+    projectinfo p
+    ON s.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy"> 
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		     limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getShareInfoMaxCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		SELECT COUNT(*) FROM share_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getShareInfoCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		SELECT COUNT(s.id) FROM share_info s LEFT JOIN appuserinfo a1 ON s.user_id=a1.id LEFT JOIN appuserinfo a2 ON s.to_user_id=a2.id LEFT JOIN 
+    projectinfo p
+    ON s.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertShareInfo" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		INSERT INTO share_info(user_id,to_user_id,device_imei,is_priority,share_date,belong_project) VALUES (#userId#,#toUserId#,#deviceId#,#isPriority#,#shareDate#,#belongProject#)
+	</insert>
+
+	<update id="updateShareInfo" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		UPDATE share_info 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="isPriority">
+		      is_priority=#isPriority#
+			</isNotEmpty>
+		</dynamic>  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteShareInfo" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
+		DELETE FROM share_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>

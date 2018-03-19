@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="playItemInfo">
+	<select id="getPlayItemInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.playiteminfo.domain.PlayItemInfo">
+		SELECT * FROM playiteminfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertPlayItemInfo" parameterClass="com.care.sys.playiteminfo.domain.PlayItemInfo">
+		INSERT INTO playiteminfo(serie_no,name,type,belong_project) VALUES (#serieNo#,#name#,#type#,#belongProject#)
+	</insert>
+	
+	<update id="updatePlayItemInfoControlType" parameterClass="com.care.sys.playiteminfo.domain.PlayItemInfo">
+		UPDATE playiteminfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="controlType">
+				control_type=#controlType#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="serieNo">
+				serie_no=#serieNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name=#name#
+			</isNotEmpty>
+		</dynamic>
+	</update>
+</sqlMap>

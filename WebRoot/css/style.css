@@ -1,0 +1,108 @@
+.result_err {
+	background-color: #FCEBEF;
+	font-size: 12px;
+	border: 1px solid #FF8686;
+	color: #A64211;
+}
+.result_ces {
+	background-color: #F9E3D5;
+	font-size: 12px;
+	border: 1px solid #F7C6A6;
+	color: #A64211;
+}
+.result_err_btn {
+	background-color: #FDD9C1;
+	border: 1px solid #9E4316;
+	letter-spacing: 4px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+.result_ces_btn {
+	background-color: #A5CAFC;
+	border: 1px solid #D4D0C8;
+	letter-spacing: 4px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+/*--------------²Ëµ¥ÑùÊ½-----------------#4F5473#6A5ACD#F08080*/
+#top{
+	padding-top:3px;
+	background: #4F5473 url("../images/bg/bg1.gif");
+}
+.view_menu { 
+	padding-bottom: 33px;
+	margin-bottom: 5px; 
+	margin-top: 10px; 
+	border-bottom: 2px solid #2E345D;
+ }
+ .view_menu li { 		
+		float: left; 
+		line-height: 32px; 
+		height: 32px; 
+		padding:0 8px ; 
+		margin-top: 1px;
+	}
+ .view_menu li.view_no_cur {
+			background: #7C82B4 url("../images/bg/title_bg1.gif");
+			border: 1px solid #2E345D;
+			border-bottom: 0;
+			margin-right: 3px;
+			font-size:12px;		
+		}
+.view_menu li.view_cur { 
+			border: 2px solid #2E345D;
+			border-bottom: 0;
+			margin-right: 3px;
+			color:#4F5473;
+		    background: #fff url("../images/bg/title_bg2.gif");	    
+			height: 32px;  
+		}
+.view_menu li.view_no_cur a {
+	        color: #fff;
+		}
+.view_menu li.view_cur a {
+	        color:#4F5473;
+	        font-size:14px;
+			font-weight:bold;
+		}
+.view_menu li.view_cur a:hover {
+	        color:#ff6600;
+	}
+.top_user{
+	color: #fff;
+	padding-left:0;
+	margin-right: 20px;
+	margin-top: 19px;
+	float:right;
+}
+li { 
+	list-style: none;
+}
+a{
+   color:#4F5473;
+   text-decoration:none;
+}
+li a:hover{
+   color:#ff6600;
+   text-decoration:underline;
+}
+.top_user a:hover{
+	color: #fff;
+	text-decoration: underline;
+}
+.smalltext{
+	font-size:13px;	
+	line-height:normal;	
+}
+.manage_title {
+			color: #FFFF00;
+			font-weight:bold;
+			font-size:15px;
+			padding:0 10px;
+			margin-top: 19px;
+			
+			margin-left: 1px;
+			float:left;
+		}

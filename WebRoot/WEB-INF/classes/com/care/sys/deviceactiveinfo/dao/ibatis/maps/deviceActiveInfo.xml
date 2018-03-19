@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="deviceActiveInfo">
+
+	<select id="setClock" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT d.*,a.device_imei,a.id FROM clock_info d LEFT JOIN device_active_info a ON d.did=a.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getDeviceActiveInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT * FROM device_active_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getlal" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT a.id,a.longitude,a.latitude,a.upload_time FROM locationinfo a  LEFT JOIN sport_info b ON b.sport_type=a.sport_type
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+		<select id="getDisturbInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT * FROM disturb_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
+	<select id="getMediaInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT id,msg_content,from_id,to_id,send_type,send_time,status,time_length,belong_project FROM mediainfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+		
+	<select id="getCityWeatherInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM weatherinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+	</select>
+	
+	<select id="getmaxtime" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM sport_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+	</select>
+	
+	<select id="getminitime" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM sport_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+	</select>
+	
+	<select id="getAddFriends" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT id,imei,m_imei,update_time,belong_project FROM  add_friend
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getCallInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT id,imei,nick_name,type,phone,use_time,call_time,b_g FROM call_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getAllCallInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM call_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<!-- <dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty> -->
+	</select>
+	
+		<select id="getSportInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM sport_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	
+	<select id="getSportTypeInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT * FROM sport_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+	<!-- 	<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>    -->
+	<!-- 	DESC
+		GROUP BY substring(upload_time,1,10) -->
+			<!--  limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty> -->
+	</select>
+	
+ <select id="getSportTypeInfoHu" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		 SELECT d.*,a.longitude,a.latitude FROM  sport_info d LEFT JOIN locationinfo a ON a.serie_no=d.imei AND a.belong_project=d.b_g
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+	</select>
+		
+	<select id="getTalkGroup" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT id,name,device_imei FROM `talk_group`
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getDeviceActiveInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT d.*,a.user_name user_name,p.project_name project FROM device_active_info d LEFT JOIN appuserinfo a ON d.user_id=a.id LEFT JOIN projectinfo p ON d.belong_project=p.id LEFT JOIN phoneinfo ph ON d.belong_project=ph.belong_project AND d.device_imei=ph.serie_no
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="belongProject">
+				$belongProject$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName">
+				$userName$
+			</isNotEmpty>
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getDeviceActiveInfoCount" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT COUNT(d.id) FROM device_active_info d LEFT JOIN appuserinfo a ON d.user_id=a.id LEFT JOIN projectinfo p ON d.belong_project=p.id LEFT JOIN phoneinfo ph ON d.belong_project=ph.belong_project AND d.device_imei=ph.serie_no
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="belongProject">
+				$belongProject$
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName">
+				$userName$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertDeviceActiveInfo" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into device_active_info
+		(device_phone,device_imei,device_name,device_head,device_sex,device_age,device_height,device_weight,device_disable,user_id,device_update_time,count,belong_project,firm,first,device_status)
+		VALUES
+		(#devicePhone#,#deviceImei#,#deviceName#,#deviceHead#,#deviceSex#,#deviceAge#,#deviceHeight#,#deviceWeight#,#deviceDisable#,#userId#,#deviceUpdateTime#,#count#,#belongProject#,#firm#,#first#,#deviceStatus#)
+	</insert>
+	<insert id="insertWeatherInfo" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into weatherinfo
+		(country,city,temperature,w_status,b_g,update_time)
+		VALUES
+		(#country#,#city#,#temperature#,#wStatus#,#belongProject#,#uploadTime#)
+	</insert>
+	
+	<insert id="insertSportInfo" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into sport_info
+		(imei,sport_type,energy,heart_rate,upload_time,b_g,distance,step,use_time)
+		VALUES
+		(#deviceImei#,#sportType#,#energy#,#heartRate#,#uDate#,#belongProject#,#distance#,#step#,#useTime#)
+	</insert>
+		<insert id="insertCallInfo" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into call_info
+		(imei,nick_name,type,phone,use_time,call_time,b_g)
+		VALUES
+		(#deviceImei#,#nickName#,#type#,#phone#,#useTime#,#callTime#,#belongProject#)
+	</insert>
+	
+	
+	
+	<insert id="insertAddFriendInfo" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into add_friend
+		(imei,m_imei,update_time,belong_project)
+		VALUES
+		(#imei#,#mImei#,#uploadTime#,#belongProject#)
+	</insert>
+	
+	<update id="updateDeviceActiveInfo"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		update device_active_info
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="deviceName">
+				device_name=#deviceName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="count">
+				count=#count#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="devicePhone">
+				device_phone=#devicePhone#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="shortNumber">
+				short_number=#shortNumber#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceHead">
+				device_head=#deviceHead#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceSex">
+				device_sex=#deviceSex#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceAge">
+				device_age=#deviceAge#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceHeight">
+				device_height=#deviceHeight#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceWeight">
+				device_weight=#deviceWeight#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceDisable">
+				device_disable=#deviceDisable#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="listenType">
+				listen_type=#listenType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="userId">
+				user_id=#userId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceUpdateTime">
+				device_update_time=#deviceUpdateTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="firm">
+				firm=#firm#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceStatus">
+				device_status=#deviceStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="step">
+				step=#step#
+			</isNotEmpty>
+			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	
+	<update id="updateWeatherInfo"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		update weatherinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="country">
+				country=#country#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="city">
+				city=#city#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="temperature">
+				temperature=#temperature#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="wStatus">
+				w_status=#wStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="uploadTime">
+				update_time=#uploadTime#
+			</isNotEmpty>
+			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+
+	<delete id="deleteDeviceActiveInfo" parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		delete from device_active_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+	<select id="getDeviceActiveInfoGroupByTime" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT COUNT(id) AS id,device_update_time FROM device_active_info 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		GROUP BY SUBSTRING(device_update_time,1,10)
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+			,
+			<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getDeviceActiveInfoCountGroupByTime" resultClass="java.lang.Integer" parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT COUNT(DISTINCT(SUBSTRING(device_update_time,1,10))) FROM device_active_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertDeviceActiveHistory" 
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		insert into device_active_history
+		(serie_no,belong_project,user_id,status,date_time,unbind_time)
+		VALUES
+		(#deviceImei#,#belongProject#,#userId#,#deviceDisable#,#deviceUpdateTime#,#unbindTime#)
+	</insert>
+	
+	<select id="getDeviceActiveHistory" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT * FROM device_active_history
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getDeviceActiveHistoryListByVo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT d.*,p.project_name,a.user_name FROM device_active_history d LEFT JOIN projectinfo p ON d.belong_project=p.id LEFT JOIN appuserinfo a ON d.user_id=a.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>			
+		</dynamic> 
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty> 
+		</dynamic>   
+			 limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getDeviceActiveHistoryCount" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		SELECT COUNT(*) FROM device_active_history d LEFT JOIN projectinfo p ON d.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<update id="updateDeviceActiveHistory"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		update device_active_history
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="unbindTime">
+				unbind_time=#unbindTime#
+			</isNotEmpty>			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<!-- ZST@20151103 -->
+	<select id="getDeviceActiveLocationInfo" resultClass="com.godoing.rose.lang.DataMap">
+		select d.id,d.belong_project,d.device_imei from device_active_info d
+		 			left join locationinfo l on d.device_imei = l.serie_no 
+					and d.`belong_project` = l.`belong_project`
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>								
+	</select>
+</sqlMap>

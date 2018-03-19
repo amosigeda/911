@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FeedBackInfo">
+
+	<select id="getFeedBackInfo_PK" resultClass="java.lang.String">
+		SELECT to_char(seq_FeedBackInfo.nextval,'0000000000') FROM DUAL;
+	</select>
+	<select id="getFeedBackInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		SELECT * FROM feedBackInfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFeedBackInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		SELECT user_name,b.id,f.id,project_name,user_id,user_feedback_content,feedback_status,date_time,processing_content,processing_time FROM feedbackinfo f LEFT JOIN appuserinfo a  ON f.user_id=a.id  LEFT JOIN projectinfo b ON f.id=b.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		     limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+
+	<select id="getFeedBackInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		SELECT COUNT(*) FROM feedbackinfo f LEFT JOIN appuserinfo a  ON f.user_id=a.id  LEFT JOIN projectinfo b ON f.belong_project=b.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getFeedBackInfoCountMap" resultClass="java.lang.Integer" parameterClass="com.godoing.rose.lang.DataParamMap">
+		SELECT COUNT(*) FROM feedbackinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<insert id="insertFeedBackInfo" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		INSERT INTO feedbackinfo(user_id,user_feedback_content,date_time,belong_project) VALUES (#contactWay#,#feedBackContent#,#dateTime#,#belongProject#)
+	</insert>
+
+	<delete id="deleteFeedBackInfo" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		DELETE FROM feedbackinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+		<update id="updateFeedBackInfo" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
+		UPDATE feedBackInfo
+		<dynamic prepend="set">
+		<isNotEmpty prepend="," property="procontent">
+			   processing_content=#procontent#
+			</isNotEmpty>
+				,feedback_status=#feedbackstatus#
+		<isNotEmpty prepend="," property="protime">
+			   processing_time=#protime#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+</sqlMap>

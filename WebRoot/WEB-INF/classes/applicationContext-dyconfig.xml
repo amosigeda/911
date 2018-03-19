@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="phoneInfoDao" class="com.care.sys.phoneinfo.dao.ibatis.SqlMapPhoneInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="phoneInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.phoneinfo.domain.logic.PhoneInfoFacadeImpl">
+				<property name="phoneInfoDao" ref="phoneInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="playItemInfoDao"
+		class="com.care.sys.playiteminfo.dao.ibatis.SqlMapPlayItemInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="playItemInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.care.sys.playiteminfo.domain.logic.PlayItemInfoFacadeImpl">
+				<property name="playItemInfoDao" ref="playItemInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="settingInfoDao"
+		class="com.care.sys.settinginfo.dao.ibatis.SqlMapSettingInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="settingInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.settinginfo.domain.logic.SettingInfoFacadeImpl">
+				<property name="settingInfoDao" ref="settingInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="relativeCallInfoDao"
+		class="com.care.sys.relativecallinfo.dao.ibatis.SqlMapRelativeCallInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="relativeCallInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.care.sys.relativecallinfo.domain.logic.RelativeCallInfoFacadeImpl">
+				<property name="relativeCallInfoDao" ref="relativeCallInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="appUserInfoDao"
+		class="com.care.sys.appuserinfo.dao.ibatis.SqlMapAppUserInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="appUserInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.appuserinfo.domain.logic.AppUserInfoFacadeImpl">
+				<property name="appUserInfoDao" ref="appUserInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="locationInfoDao"
+		class="com.care.sys.locationinfo.dao.ibatis.SqlMapLocationInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="locationInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.care.sys.locationinfo.domain.logic.LocationInfoFacadeImpl">
+				<property name="locationInfoDao" ref="locationInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="deviceActiveInfoDao"
+		class="com.care.sys.deviceactiveinfo.dao.ibatis.SqlMapDeviceActiveInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="deviceActiveInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.care.sys.deviceactiveinfo.domain.logic.DeviceActiveInfoFacadeImpl">
+				<property name="deviceActiveInfoDao" ref="deviceActiveInfoDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="safeAreaDao" class="com.care.sys.safearea.dao.ibatis.SqlMapSafeAreaDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="safeAreaFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.safearea.domain.logic.SafeAreaFacadeImpl">
+				<property name="safeAreaDao" ref="safeAreaDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="feedBackInfoDao"
+		class="com.care.sys.feedbackinfo.dao.ibatis.SqlMapFeedBackInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="feedBackInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.care.sys.feedbackinfo.domain.logic.FeedBackInfoFacadeImpl">
+				<property name="feedBackInfoDao" ref="feedBackInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="checkInfoDao"
+		class="com.care.sys.checkinfo.dao.ibatis.SqlMapCheckInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="checkInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.checkinfo.domain.logic.CheckInfoFacadeImpl">
+				<property name="checkInfoDao" ref="checkInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="shareInfoDao"
+		class="com.care.sys.shareinfo.dao.ibatis.SqlMapShareInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="shareInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.shareinfo.domain.logic.ShareInfoFacadeImpl">
+				<property name="shareInfoDao" ref="shareInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="msgInfoDao"
+		class="com.care.sys.msginfo.dao.ibatis.SqlMapMsgInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="msgInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.msginfo.domain.logic.MsgInfoFacadeImpl">
+				<property name="msgInfoDao" ref="msgInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="directiveInfoDao"
+		class="com.care.sys.directiveinfo.dao.ibatis.SqlMapDirectiveInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="directiveInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.directiveinfo.domain.logic.DirectiveInfoFacadeImpl">
+				<property name="directiveInfoDao" ref="directiveInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="companyInfoDao" class="com.care.sys.companyinfo.dao.ibatis.SqlMapCompanyInfoDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="companyInfoFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.companyinfo.domain.logic.CompanyInfoFacadeImpl">
+                <property name="companyInfoDao" ref="companyInfoDao" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="channelInfoDao" class="com.care.sys.channelinfo.dao.ibatis.SqlMapChannelInfoDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="channelInfoFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.channelinfo.domain.logic.ChannelInfoFacadeImpl">
+                <property name="channelInfoDao" ref="channelInfoDao" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="projectInfoDao" class="com.care.sys.projectinfo.dao.ibatis.SqlMapProjectInfoDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="projectInfoFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.projectinfo.domain.logic.ProjectInfoFacadeImpl">
+                <property name="projectInfoDao" ref="projectInfoDao" />
+                <property name="dynamicInfoDao" ref="dynamicInfoDao" />
+            </bean>
+        </property>
+    </bean>
+    
+     <bean id="saleInfoDao" class="com.care.sys.saleinfo.dao.ibatis.SqlMapSaleInfoDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="saleInfoFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.saleinfo.domain.logic.SaleInfoFacadeImpl">
+                <property name="saleInfoDao" ref="saleInfoDao" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="userLoginInfoDao" class="com.care.sys.userlogininfo.dao.ibatis.SqlMapUserLoginInfoDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="userLoginInfoFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.userlogininfo.domain.logic.UserLoginInfoFacadeImpl">
+                <property name="userLoginInfoDao" ref="userLoginInfoDao" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="deviceLoginDao" class="com.care.sys.deviceLogin.dao.ibatis.SqlMapDeviceLoginDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="deviceLoginFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.care.sys.deviceLogin.domain.logic.DeviceLoginFacadeImpl">
+                <property name="deviceLoginDao" ref="deviceLoginDao" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="registerInfoDao" class="com.care.sys.sysregisterinfo.dao.ibatis.SqlMapRegisterInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	<bean id="registerInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.sysregisterinfo.domain.logic.SysRegisterInfoFacadeImpl">
+				<property name="registerInfoDao" ref="registerInfoDao" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="devicePhoneInfoDao" class="com.care.sys.devicephoneinfo.dao.ibatis.SqlMapDevicePhoneInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>		
+	</bean>	
+	<bean id="devicePhoneInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.devicephoneinfo.domain.logic.DevicePhoneInfoFacadeImpl">
+				<property name="devicePhoneInfoDao" ref="devicePhoneInfoDao"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="phoneCountryInfoDao" class="com.care.sys.phonecountryinfo.dao.ibatis.SqlMapPhoneCountryInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	
+	<bean id="phoneCountryInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.phonecountryinfo.domain.logic.PhoneCountryInfoFacadeImpl">
+				<property name="phoneCountryInfoDao" ref="phoneCountryInfoDao"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="projectImageDao" class="com.care.sys.projectimage.dao.ibatis.SqlMapProjectImageDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	
+	<bean id="projectImageFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.projectimage.domain.logic.ProjectImageFacadeImpl">
+				<property name="projectImageDao" ref="projectImageDao"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="dynamicInfoDao" class="com.care.sys.dynamicInfo.dao.ibatis.SqlMapDynamicInfoDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	
+	<bean id="dynamicInfoFacade" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.care.sys.dynamicInfo.domain.logic.DynamicInfoFacadeImpl">
+				<property name="dynamicInfoDao" ref="dynamicInfoDao"></property>
+			</bean>
+		</property>
+	</bean>
+</beans>

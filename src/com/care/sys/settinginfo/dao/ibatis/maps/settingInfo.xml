@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="settingInfo">
+	<select id="getSettingInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		SELECT * FROM settinginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertSettingInfo" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		INSERT INTO settinginfo(serie_no,volume,map,fallOn,light,gps_on,light_sensor,fall,belong_project) VALUES (#serieNo#,#volume#,#map#,#fallOn#,#light#,#gps_on#,#light_sensor#,#fall#,#belongProject#)
+	</insert>
+	
+	<update id="updateSettingInfo" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		UPDATE settinginfo 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="volume">
+		      volume=#volume#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="map">
+		      map=#map#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fallOn">
+		      fallOn=#fallOn#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="light">
+		      light=#light#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gps_on">
+		      gps_on=#gps_on#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="light_sensor">
+		      light_sensor=#light_sensor#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fall">
+		      fall=#fall#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="shutdown">
+				shutdown=#shutdown#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="repellent">
+				repellent=#repellent#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="heart">
+				heart=#heart#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="isOff">
+				is_off=#isOff#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="type">
+				type=#type#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="levels">
+				levels=#levels#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="degree">
+				degree=#degree#
+			</isNotEmpty>	
+		</dynamic>  
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	<delete id="deleteSettingInfo" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		DELETE FROM settinginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$ 
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+	<select id="getSettingInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		SELECT * FROM settinginfo s LEFT JOIN projectinfo p ON s.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+			limit
+			<isNotEmpty prepend=" " property="from">
+				$from$
+			</isNotEmpty>
+				,
+			<isNotEmpty prepend=" " property="pageSize">
+				$pageSize$
+			</isNotEmpty>
+	</select>
+	
+	<select id="getSettingInfoCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.settinginfo.domain.SettingInfo">
+		SELECT COUNT(*) FROM settinginfo s LEFT JOIN projectinfo p ON s.belong_project=p.id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="getSettingInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.settinginfo.domain.SettingInfo" >
+		SELECT COUNT(*) FROM settinginfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+</sqlMap>
